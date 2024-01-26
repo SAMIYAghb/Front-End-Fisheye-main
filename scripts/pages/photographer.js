@@ -34,9 +34,10 @@ async function getPhotographer(photographer_id) {
       console.error("Erreur lors de la récupération des photographes:", error.message);
     }
   }
-  getPhotographer('243');
+  // getPhotographer('243');
 
   async function getMediaByPhotographerId(photographer_id) {
+    console.log("Photographer ID:", photographer_id);
     try {
       const response = await fetch("../../data/photographers.json");
       if (!response.ok) {
@@ -48,88 +49,72 @@ async function getPhotographer(photographer_id) {
       const media = data.media;
   
       console.log(media);
-    //   const mediaOfPhotographer = media.filter(item => item.photographerId === "photographerId");
-    //   if (mediaOfPhotographer.length > 0) {
-    //     console.log(mediaOfPhotographer);
-    //   } else {
-    //     console.log("Aucun média trouvé pour ce photographe");
-    //   }
+      const mediaOfPhotographer = media.filter(item => item.photographerId == photographer_id);
+      console.log(mediaOfPhotographer)
+
+      if (mediaOfPhotographer.length > 0) {
+        console.log(mediaOfPhotographer);
+      } else {
+        console.log("Aucun média trouvé pour ce photographe");
+      }
       
   
-    //   return mediaOfPhotographer;
+      return mediaOfPhotographer;
       
 
-    // } catch (error) {
-    //   console.error("Erreur lors de la récupération des médias:", error.message);
-    //   throw error;
-    // }
+    } catch (error) {
+      console.error("Erreur lors de la récupération des médias:", error.message);
+      throw error;
+    }
 
-    const mediaOfPhotographer = [];
+  //   const mediaOfPhotographer = {};
     
-    for (const item of media) {
-      if (item.photographerId === "photographer_id") {
-        mediaOfPhotographer.push(item);
-      }
-    }
+  //   for (const item of media) {
+  //     if (item.photographerId == photographer_id) {
+  //       mediaOfPhotographer.push(item);
+  //       // console.log(mediaOfPhotographer)
+  //     }
+  //   }
 
-    if (mediaOfPhotographer.length > 0) {
-      console.log(mediaOfPhotographer);
-    } else {
-      console.log("Aucun média trouvé pour ce photographe");
-    }
+  //   if (mediaOfPhotographer.length > 0) {
+  //     console.log(mediaOfPhotographer);
+  //   } else {
+  //     console.log("Aucun média trouvé pour ce photographe");
+  //   }
 
-    return mediaOfPhotographer;
-  } catch (error) {
-    console.error("Erreur lors de la récupération des médias:", error.message);
+  //   return mediaOfPhotographer;
+  // } catch (error) {
+  //   console.error("Erreur lors de la récupération des médias:", error.message);
+  // }
   }
-  }
-  getMediaByPhotographerId("243")
-  getMediaByPhotographerId("82")
+  // getMediaByPhotographerId()
+  // getMediaByPhotographerId("82")
 
-// async function getMedias() {
-//   try {
-//     const response = await fetch("../../data/photographers.json");
-//     if (!response.ok) {
-//       throw new Error(`Erreur HTTP: ${response.status}`);
-//     }
-//     const data = await response.json();
-//     // console.log(response);
-//     //   console.log(data);
-//     //   console.log(data.media);
-//     const media = data.media;
-//     // console.log(media);
-//     return media;
-//   } catch (error) {
-//     console.error(
-//       "Erreur lors de la récupération des photographes:",
-//       error.message
-//     );
-//   }
-// }
-//   getMedias();
+
 
 // Photographer's detail
-// async function displayPhotographer(photographer) {
-//   const photographersHeader = document.querySelector(".photograph-header");
-// //   console.log(photographersHeader);
-//   const contactButton = document.querySelector(".contact_button");
-// //   console.log(contactButton);
-//   const photographerDetails = photographerTemplate(photographer);
-//   console.log(photographerDetails);
-// //   const userCardDOM = photographerDetails.getUserCardDOM();
-// //   console.log(userCardDOM);
-// //   const photographerAvatar = photographerDetails.getUserAvatarDOM();
-//   photographersHeader.insertBefore(userCardDOM, contactButton);
-// //   photographersHeader.appendChild(photographerAvatar);
-// }
+async function displayPhotographer(photographer) {
+  console.log(photographer)
+  const photographersHeader = document.querySelector(".photograph-header");
+  // console.log(photographersHeader);
+  const contactButton = document.querySelector(".contact_button");
+  // console.log(contactButton);
+  const photographerDetails = photographerTemplate(photographer);
+  console.log(photographerDetails);
+//   const userCardDOM = photographerDetails.getUserCardDOM();
+//   console.log(userCardDOM);
+//   const photographerAvatar = photographerDetails.getUserAvatarDOM();
+  // photographersHeader.insertBefore(userCardDOM, contactButton);
+//   photographersHeader.appendChild(photographerAvatar);
+}
 
 async function init() {
   // Récupère les medias et photographes
-  medias = await getMediaByPhotographerId();
+  medias = await getMediaByPhotographerId(photographer_id);
 //   console.log(medias)
-  photographer = await getPhotographer("82");
+  photographer = await getPhotographer(photographer_id);
     // console.log(photographer);
-//   displayPhotographer(photographer);
+  displayPhotographer(photographer);
   // displayMedias(medias);
 }
 
