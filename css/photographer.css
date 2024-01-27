@@ -6,6 +6,11 @@
   background-color: #fafafa;
   height: 300px;
   margin: 0 100px;
+  /**/
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 34px;
 }
 
 .contact_button {
@@ -73,5 +78,12 @@ form input {
   height: 68px;
   border: none;
   border-radius: 5px;
+}
+
+/**/
+.photographer_avatar{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
 }
 

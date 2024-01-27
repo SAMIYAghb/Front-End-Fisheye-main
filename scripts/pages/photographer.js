@@ -1,4 +1,7 @@
 // //Mettre le code JavaScript lié à la page photographer.html
+import  {photographerDetailsFactory} from '../factories/photographDetailsFactory.js';
+
+
 let params = (new URL(document.location)).searchParams;
 let photographer_id = params.get('id');
 let medias;
@@ -24,7 +27,7 @@ async function getPhotographer(photographer_id) {
       });
       
       if (result) {
-        console.log(result);
+        // console.log(result);
       } else {
         console.log("Photographe non trouvé");
       }
@@ -37,7 +40,7 @@ async function getPhotographer(photographer_id) {
   // getPhotographer('243');
 
   async function getMediaByPhotographerId(photographer_id) {
-    console.log("Photographer ID:", photographer_id);
+    // console.log("Photographer ID:", photographer_id);
     try {
       const response = await fetch("../../data/photographers.json");
       if (!response.ok) {
@@ -45,15 +48,15 @@ async function getPhotographer(photographer_id) {
       }
   
       const data = await response.json();
-    //   console.log(data.media)
+      // console.log(data.media)
       const media = data.media;
   
-      console.log(media);
+      // console.log(media);
       const mediaOfPhotographer = media.filter(item => item.photographerId == photographer_id);
-      console.log(mediaOfPhotographer)
+      // console.log(mediaOfPhotographer)
 
       if (mediaOfPhotographer.length > 0) {
-        console.log(mediaOfPhotographer);
+        // console.log(mediaOfPhotographer);
       } else {
         console.log("Aucun média trouvé pour ce photographe");
       }
@@ -94,18 +97,31 @@ async function getPhotographer(photographer_id) {
 
 // Photographer's detail
 async function displayPhotographer(photographer) {
-  console.log(photographer)
+  // console.log(photographer)
   const photographersHeader = document.querySelector(".photograph-header");
   // console.log(photographersHeader);
   const contactButton = document.querySelector(".contact_button");
   // console.log(contactButton);
-  const photographerDetails = photographerTemplate(photographer);
-  console.log(photographerDetails);
-//   const userCardDOM = photographerDetails.getUserCardDOM();
-//   console.log(userCardDOM);
-//   const photographerAvatar = photographerDetails.getUserAvatarDOM();
-  // photographersHeader.insertBefore(userCardDOM, contactButton);
-//   photographersHeader.appendChild(photographerAvatar);
+  const photographerDetails = photographerDetailsFactory(photographer);
+  // console.log(photographerDetails);
+  const userCardDOM = photographerDetails.getUserCardDOM();
+  // console.log(userCardDOM);
+/*** */
+// Utilisez la fonction pour créer un objet photographerAvatarDom
+  const photographerAvatarDom = photographerDetailsFactory(photographer);
+// console.log(photographerAvatarDom)
+  // Obtenez l'avatar du photographe
+  const photographerAvatar = photographerAvatarDom.getUserAvatarDOM();
+  // console.log(photographerAvatar)
+/*** */
+
+  photographersHeader.insertBefore(userCardDOM, contactButton);
+  photographersHeader.appendChild(photographerAvatar);
+}
+
+// Photographer's medias
+async function displayPhotographerMedia(photographer) {
+
 }
 
 async function init() {
@@ -115,7 +131,8 @@ async function init() {
   photographer = await getPhotographer(photographer_id);
     // console.log(photographer);
   displayPhotographer(photographer);
-  // displayMedias(medias);
+  displayPhotographerMedia(photographer);
+  
 }
 
 init();

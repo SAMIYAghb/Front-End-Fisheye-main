@@ -38,29 +38,9 @@ function photographerTemplate(data) {
 
     return article;
   }
-  // function getUserHeaderDOM() {
-  //   const photographHeader = document.querySelector(".photograph-header");
-  //   console.log(photographHeader);
-
-  //   const article = document.createElement("article");
-
-  //   const h2 = document.createElement("h2");
-  //   h2.textContent = name;
-  //   photographHeader.appendChild(h2);
-
-  //   const h4 = document.createElement("h4");
-  //   h4.textContent = city;
-
-  //   article.appendChild(h2);
-  //   article.appendChild(h4);
-
-  //   return article;
-  // }
-  // function getUserAvatarDOM(){
-    
-  // }
-  
 
   
   return { name, picture, city, tagline, price, getUserCardDOM };
 }
+
+export { photographerTemplate };
