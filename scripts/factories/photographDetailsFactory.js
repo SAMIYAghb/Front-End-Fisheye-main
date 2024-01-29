@@ -30,7 +30,7 @@ function photographerDetailsFactory(data) {
   function getUserAvatarDOM() {
     const img = document.createElement("img");
     img.setAttribute("src", picture);
-    img.setAttribute("alt", "Photo de " + name);
+    img.setAttribute("alt", name);
     img.classList.add("photographer_avatar");
 
     return img;
