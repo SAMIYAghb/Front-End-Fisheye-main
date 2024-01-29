@@ -9,7 +9,7 @@ function photographerTemplate(data) {
     const article = document.createElement("article");
     const img = document.createElement("img");
     img.setAttribute("src", picture);
-    img.setAttribute("alt", `${name}'s portrait - ${tagline}`); // Ajout d'un attribut alt pour décrire l'image
+    img.setAttribute("alt", `${name}`); // Ajout d'un attribut alt pour décrire l'image
     // utilise des balises <figure> et <figcaption> pour englober l'image et sa description.
   //   const figcaption = document.createElement("figcaption");
   // figcaption.textContent = `${name}, ${city}, ${tagline}, ${price}€/jour`;
