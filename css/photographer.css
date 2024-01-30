@@ -147,6 +147,43 @@ article{
   margin: 0;
   border-radius: 5px;
   cursor: pointer;
-
   margin-top: 1rem; 
 }
+
+#photographer-images figure {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 5rem;
+
+}
+
+main figcaption {
+  font-size: 1.5rem;
+  color: #901c1c;
+  max-width: 290px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.5rem 0 0.5rem 0;
+  
+}
+#photographer-images figure span,
+  #photographer-images figure i{
+    position: absolute;
+    font-size: 1.3rem;
+    bottom: 0.8rem;
+    right: 0;
+    color: #901c52;
+    transition: color 0.1s ease-in-out;
+
+  }
+  #photographer-images figure i{
+    cursor: pointer;
+  }
+  #photographer-images figure span{
+    bottom: 0.65rem;
+    right: 1.75rem;
+    font-weight: bold;
+  }

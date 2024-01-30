@@ -45,9 +45,9 @@ function mediaFactory(media) {
         `;
         }
         //uel que soit le type de média, un bloc commun est ajouté à l'élément <figure> :
-        figure.innerHTML += `
-            <span tabindex="0" aria-label="likes">${likes}</span>           
-            <i class="fa-solid fa-heart"></i>
+        figure.innerHTML += `           
+                <span tabindex="0" aria-label="likes">${likes}</span>           
+                <i class="fa-solid fa-heart"></i>
         `
         return (figure);
     }
