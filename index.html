@@ -9,16 +9,20 @@
   </head>
   <body>
     <header>
-        <img src="assets/images/logo.png" class="logo" alt="fisheye logo"/>
+      <nav>
+        <a href="index.html">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye Home page"/>
+      </a>
+      </nav>
         <h1>Nos photographes</h1>
     </header>
     <!-- Ajouter un rôle à la section des photographes : -->
     <main id="main" role="main">
         <div class="photographer_section"></div>
     </main>
-    <!-- <script type="module" src="scripts/factories/photographerMediaFactory.js"></script> -->
-    <!-- <script type="module" src="scripts/factories/photographerDetailsFactory.js"></script> -->
-    <script type="module" src="scripts/templates/photographer.js"></script>
-    <script  type="module" src="scripts/pages/index.js"></script>
+    <script type="module" src="scripts/utils/api.js"></script>
+    <script type="module" src="scripts/factories/photographer.js"></script>
+    <!-- <script type="module" src="scripts/templates/photographer.js"></script> -->
+    <script type="module" src="scripts/pages/index.js"></script>
   </body>
 </html>

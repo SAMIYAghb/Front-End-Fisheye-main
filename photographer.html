@@ -9,20 +9,56 @@
   </head>
   <body>
     <header>
+      <a href="index.html">
       <img src="assets/images/logo.png" class="logo"
-      alt="Logo de Fisheye - photographe" 
+      alt="Fisheye Home page" 
        />
+      </a>
     </header>
-    <main id="main"  role="main">
+    <main id="main">
       <div class="photograph-header">
+        <div class="photograph-header__bloc-titre">
+          <h1 class="photograph-name"></h1>
+          <p class="photograph-location"></p>
+          <p class="photograph-tagline"></p>
+        </div>
         <button 
-        aria-label="cliquer pour contacter"
+        aria-label="Contact me"
         class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
-      <section class="photograph-media">
 
-      </section>
+      <!-- <label for="sort-images-select" aria-label="Order by">Trier par</label>
+      <div class="dropdown">
+        <button id="sort-images-button" aria-haspopup="listbox" aria-expanded="false"
+          aria-labelledby="sort-images-select">
+          Popularité
+        </button>
+        <ul id="sort-images-select" role="listbox" aria-activedescendant="option1" aria-labelledby="sort-images-select">
+          <li id="option1" role="option" tabindex="0" data-value="likes" aria-selected="true">Popularité</li>
+          <li id="option2" role="option" tabindex="0" data-value="date" aria-selected="false">Date</li>
+          <li id="option3" role="option" tabindex="0" data-value="title" aria-selected="false">Titre</li>
+        </ul>
+      </div>
+      <div id="photographer-images"></div>
+      <div class="likes-banner">
+        <span class="count-likes"></span>
+        <span class="tarif"></span>
+      </div>
+      -->
     </main>
+
+    <!-- <section class="lightbox">
+      <div class="border-lightbox" role="dialog" aria-modal="true">
+        <span class="close" aria-label="Fermer la lightbox">&times;</span>
+        <a class="prev" aria-label="Image précédente">&#10094;</a>
+        <figure class="lightbox-img-container">
+          <img class="lightbox-img" alt="image" src="assets/images/logo.png">
+          <figcaption class="lightbox-caption"></figcaption>
+        </figure>
+        <a class="next" aria-label="Image suivante">&#10095;</a>
+      </div>
+    </section> -->
+
     <div id="contact_modal">
 			<div class="modal">
 				<header>
@@ -44,7 +80,9 @@
 				</form>
 			</div>
 		</div>
-    <script type="module" src="/scripts/templates/photographer.js"></script>
+    <!-- <script type="module" src="/scripts/templates/photographer.js"></script> -->
+    <script type="module" src="scripts/utils/api.js"></script>
+    <script type="module" src="scripts/factories/photographer.js"></script>
     <script type="module" src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
