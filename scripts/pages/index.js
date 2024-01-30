@@ -59,7 +59,8 @@
 //     init();
    
 import { getPhotographers } from '../utils/api.js';
-import { photographerFactory } from '../factories/photographer.js'
+import { photographerFactory } from '../factories/photographer.js';
+
 // Affiche les données des photographes
 function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
@@ -77,7 +78,7 @@ async function init() {
     
     //On attend la récupération des données
     const photographers = await getPhotographers();
-    console.log(photographers);
+    // console.log(photographers);
     displayData(photographers);
 
 }

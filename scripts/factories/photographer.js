@@ -18,6 +18,42 @@ function photographerFactory(data) {
     }
     return { name, portrait, location, tagline, getUserCardDOM }
 }
-export { photographerFactory };
+
 //appeler photographerFactory avec un objet data, cela crée un objet contenant les propriétés spécifiées, 
 //appeler la fonction getUserCardDOM pour obtenir la représentation DOM de la carte du photographe.
+
+// Factory pour générer la galerie d'images du photographe
+function mediaFactory(media) {
+    const { title, likes, price, date, type, url, id} = media;
+
+    function getMediaCardDOM() {
+        const figure = document.createElement('figure');
+        //remplacer les espaces par "%20" pour s'assurer que l'URI est correctement formaté.
+        const uri = url.replace(" ","%20")
+        // figure.tabIndex = 0;
+        //En fonction du type du média (image ou video), l'élément <figure> est construit différemment :
+        if(type === "image"){
+            figure.innerHTML = `
+            <img src="${uri}" alt="${title}" title="${title}" id="${id}" tabindex="0">
+            <figcaption>${title}</figcaption>
+        `;
+        }
+        else{
+            figure.innerHTML = `
+            <video src="${uri}" type="video/mp4" alt="${title}" title="${title}" id="${id}" tabindex="0"></video>
+            <figcaption class="video-caption">${title}</figcaption>
+        `;
+        }
+        //uel que soit le type de média, un bloc commun est ajouté à l'élément <figure> :
+        figure.innerHTML += `
+            <span tabindex="0" aria-label="likes">${likes}</span>           
+            <i class="fa-solid fa-heart"></i>
+        `
+        return (figure);
+    }
+    return { title, likes, price, date, type, url, id, getMediaCardDOM }
+}
+
+export { photographerFactory };
+export { mediaFactory };
+//Lorsqu'on' appele mediaFactory avec un objet media, cela crée un objet avec les propriétés spécifiées et génère un élément <figure> qui représente la carte du média.

@@ -114,6 +114,7 @@ async function getPhotographers(){
   //crée des objets Media pour chaque média.
   const medias = data.media.map(mediaData => {
     const media = new Media(mediaData);
+    console.log('media:', media);
     return {
       id: media.id,
       photographerId: media.photographerId,
