@@ -8,7 +8,7 @@ class Api {
     //La méthode get utilise l'API Fetch pour effectuer une requête GET à l'URL spécifiée.
     async get() {
       try {
-        console.log('Fetching data from:', this._url);
+        // console.log('Fetching data from:', this._url);
         const response = await fetch(this._url);
         if (!response.ok) {
           throw new Error("La réponse du réseau n'est pas correcte");
@@ -100,7 +100,7 @@ async function getPhotographers(){
   const photographers = data.photographers.map(photographerData => {
    //crée des objets Photographer pour chaque photographe
     const photographer = new Photographer(photographerData);
-    console.log('Photographer:', photographer);
+    // console.log('Photographer:', photographer);
     return {
       name: photographer.name,
       id: photographer.id,

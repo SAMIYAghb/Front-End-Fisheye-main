@@ -80,7 +80,7 @@ form input {
   border-radius: 5px;
 }
 
-/**/
+/***** photographer Header *****/
 /* .photographer_avatar{
   width: 200px;
   height: 200px;
@@ -94,6 +94,11 @@ a{
 a{
   text-decoration: none;
 }
+
+article{
+ text-align: center;
+}
+
 .photograph-name{
   color: #D3573C;
   font-size: 4rem;
@@ -116,4 +121,32 @@ a{
 
 .img-rounded{
   border-radius: 50%;
+}
+
+/****Media Galerie****/
+#photographer-images {
+  /* margin: 0 100px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ /* position: relative; */
+
+  flex-wrap: wrap;
+  /* padding-bottom: 1rem; */ 
+} 
+
+#photographer-images img, #photographer-images video {
+  /* width: 350px;
+  height: 300px; */
+  /* width: 32%; */
+   /* width: 350px;
+  height: 300px; */
+  width: 21.875rem;
+  height: 18.75rem;
+  object-fit: cover;
+  margin: 0;
+  border-radius: 5px;
+  cursor: pointer;
+
+  margin-top: 1rem; 
 }

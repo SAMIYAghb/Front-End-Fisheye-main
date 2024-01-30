@@ -140,7 +140,7 @@
 import { getPhotographers } from '../utils/api.js';
 import { photographerFactory, mediaFactory  } from '../factories/photographer.js';
 
-// Affiche le header du photographe
+// créer le header du photographe
 function headerPhotographer(photographer){
     const photographeName = document.querySelector('.photograph-name');
     const photographeLocation = document.querySelector('.photograph-location');
@@ -158,6 +158,18 @@ function headerPhotographer(photographer){
     img.classList.add('img-rounded'); 
     photographeHeader.appendChild(img);
   }
+  // Fonction pour afficher la galerie d'images
+function displayMedia(medias) {
+    const imagesContainer = document.getElementById('photographer-images');
+    // console.log(imagesContainer);
+    imagesContainer.innerHTML = "";
+    // console.log(medias);
+    medias.forEach((media) => {
+      const mediaModel = mediaFactory(media);
+      const mediaCardDOM = mediaModel.getMediaCardDOM();
+      imagesContainer.appendChild(mediaCardDOM);
+    });
+  }
 
   // Fonction d'initialisation
 async function init() {
@@ -168,11 +180,13 @@ async function init() {
   // Récupération de l'objet photographe correspondant avec ses medias
   const photographers = await getPhotographers();
   const photographer = photographers.find(item => item.id == photographerId);
-  console.log("photographer avec ses medias:",photographer);
-  // affichage l'entete du photographe
+  // console.log("photographer avec ses medias:",photographer);
+  // console.log(" ses medias:",photographer.medias);
+  // affichage le header du photographe
   headerPhotographer(photographer);
 //   const sortedMedias = sortMediaBy('likes',photographer.medias);
-  
+    // affichage la galerie du photographe
+    displayMedia(photographer.medias);
 
 }
 init();
