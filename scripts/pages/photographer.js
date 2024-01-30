@@ -66,26 +66,42 @@ async function init() {
 
 
   // Evenement 'click' sur toute la partie main
-const main = document.getElementById('main');
-main.addEventListener('click', event => {
+    const main = document.getElementById('main');
+    main.addEventListener('click', event => {
 
-  //  récupèration des coordonnées du click
-  const x = event.clientX; 
-  const y = event.clientY;
-  // console.log(x,y);
-  // console.log(event.target);
-  // console.log(event.target.tagName);
-  if((event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO') && event.target.parentElement.className !== 'photograph-header' ){
-    const photographerMedias = photographer.medias;
-    // console.log(photographerMedias);
-      const mediaId = event.target.id;
-      // console.log(mediaId);
-      const media = photographerMedias.find(media => media.id == mediaId);
-      // console.log(media);
-      const mediaIndex = photographerMedias.indexOf(media);
-      // console.log(mediaIndex);
-      openLightbox (photographerMedias, x, y, mediaIndex);
-  }
+      //  récupèration des coordonnées du click
+      const x = event.clientX; 
+      const y = event.clientY;
+      // console.log(x,y);
+      // console.log(event.target);
+      // console.log(event.target.tagName);
+      if((event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO') && event.target.parentElement.className !== 'photograph-header' ){
+        const photographerMedias = photographer.medias;
+        // console.log(photographerMedias);
+          const mediaId = event.target.id;
+          // console.log(mediaId);
+          const media = photographerMedias.find(media => media.id == mediaId);
+          // console.log(media);
+          const mediaIndex = photographerMedias.indexOf(media);
+          // console.log(mediaIndex);
+          openLightbox (photographerMedias, x, y, mediaIndex);
+      }
+
+          // On incrémente une seule fois les compteurs de likes lorsqu'on clique dessus
+    // if (event.target.className === 'fa-solid fa-heart') {
+     
+    //   const liked = event.target.parentElement;
+      
+    //   if(!liked.classList.contains('liked')){
+    //     liked.classList.add('liked');
+    //     totalLikes ++;
+    //     countLikes.innerText = `${totalLikes}`;
+    //     const likeCount = liked.querySelector('span');
+    //     likeCount.textContent = parseInt(likeCount.textContent) + 1;
+    //     const heartIcons = liked.querySelector('.fa-solid.fa-heart');
+    //     heartIcons.style.color = '#df00df';
+    //   }
+    // }
 
 
 })
