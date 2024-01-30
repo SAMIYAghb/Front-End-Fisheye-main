@@ -58,7 +58,8 @@
     
 //     init();
    
-
+import { getPhotographers } from '../utils/api.js';
+import { photographerFactory } from '../factories/photographer.js'
 // Affiche les données des photographes
 function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");

@@ -1,6 +1,6 @@
 // Factory pour générer les photographes de la page d'acceuil
 function photographerFactory(data) {
-    //extrait des propriétés de l'objet data
+    //  déstructuration pour extrait des propriétés de l'objet data
     const { name, portrait, location, tagline, price, id} = data;
 
     function getUserCardDOM() {
@@ -18,3 +18,6 @@ function photographerFactory(data) {
     }
     return { name, portrait, location, tagline, getUserCardDOM }
 }
+export { photographerFactory };
+//appeler photographerFactory avec un objet data, cela crée un objet contenant les propriétés spécifiées, 
+//appeler la fonction getUserCardDOM pour obtenir la représentation DOM de la carte du photographe.

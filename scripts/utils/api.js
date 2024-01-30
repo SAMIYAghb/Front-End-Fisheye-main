@@ -98,7 +98,6 @@ async function getPhotographers(){
   const data = await api.get();
 
   const photographers = data.photographers.map(photographerData => {
-    console.log('Photographers:', photographers);
    //crée des objets Photographer pour chaque photographe
     const photographer = new Photographer(photographerData);
     console.log('Photographer:', photographer);
@@ -146,3 +145,4 @@ async function getPhotographers(){
   });
   return photographers;
 }
+export { getPhotographers };
