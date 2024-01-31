@@ -24,6 +24,7 @@
   background-color: #901c1c;
   border-radius: 5px;
   cursor: pointer;
+  margin-left: -232px;
 }
 
 .modal {
@@ -287,7 +288,7 @@ main figcaption {
   justify-content: space-between;
   position: fixed;
   bottom: 0;
-  right: 3.5rem;
+  right: 2rem;
   padding: 1rem 1.5rem;
   background-color: #db8876;
   color: black;

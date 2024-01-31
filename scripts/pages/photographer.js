@@ -1,10 +1,9 @@
-
 import { getPhotographers } from "../utils/api.js";
 import {
   photographerFactory,
   mediaFactory,
 } from "../factories/photographer.js";
-import {openLightbox} from '../utils/lightbox.js' ; 
+import { openLightbox } from "../utils/lightbox.js";
 
 // créer le header du photographe
 function headerPhotographer(photographer) {
@@ -38,8 +37,6 @@ function displayMedia(medias) {
   });
 }
 
-
-
 // Fonction d'initialisation
 async function init() {
   // Récupération de l'ID du photographe
@@ -61,37 +58,65 @@ async function init() {
   displayMedia(photographer.medias);
 
 
-
+  //afficher le nombre du like et le tarif
+    // Récupération des valeurs pour la bannière des likes
+    const countLikes = document.querySelector(".count-likes");
+    // console.log(countLikes);
+    const tarif = document.querySelector(".tarif");
+    // console.log(tarif);
+    // On tag le total des likes et du tarif journalier dans la bannière
+    let totalLikes = photographer.medias.reduce((sum, obj) => sum + obj.likes, 0);
+    console.log(totalLikes);
+    countLikes.innerText = totalLikes;
+    // countLikes.innerText = `${totalLikes}`;
+    tarif.innerText = `${photographer.price}€/jour`
 
 
 
   // Evenement 'click' sur toute la partie main
-    const main = document.getElementById('main');
-    main.addEventListener('click', event => {
+  const main = document.getElementById("main");
+  main.addEventListener("click", (event) => {
+    //  récupèration des coordonnées du click
+    const x = event.clientX;
+    const y = event.clientY;
+    // console.log(x,y);
+    // console.log(event.target);
+    // console.log(event.target.tagName);
+    if (
+      (event.target.tagName === "IMG" || event.target.tagName === "VIDEO") &&
+      event.target.parentElement.className !== "photograph-header"
+    ) {
+      const photographerMedias = photographer.medias;
+      // console.log(photographerMedias);
+      const mediaId = event.target.id;
+      // console.log(mediaId);
+      const media = photographerMedias.find((media) => media.id == mediaId);
+      // console.log(media);
+      const mediaIndex = photographerMedias.indexOf(media);
+      // console.log(mediaIndex);
+      openLightbox(photographerMedias, x, y, mediaIndex);
+    }
+/****quand j'ai mi ce code a l'interieur de adEventLesten le nombre de likes et le tarif ne s'affiche pas autaumatiquement */
+    // //afficher le nombre du like et le tarif
+    // // Récupération des valeurs pour la bannière des likes
+    // const countLikes = document.querySelector(".count-likes");
+    // // console.log(countLikes);
+    // const tarif = document.querySelector(".tarif");
+    // // console.log(tarif);
+    // // On tag le total des likes et du tarif journalier dans la bannière
+    // let totalLikes = photographer.medias.reduce((sum, obj) => sum + obj.likes, 0);
+    // console.log(totalLikes);
+    // countLikes.innerText = totalLikes;
+    // // countLikes.innerText = `${totalLikes}`;
+    // tarif.innerText = `${photographer.price}€/jour`
 
-      //  récupèration des coordonnées du click
-      const x = event.clientX; 
-      const y = event.clientY;
-      // console.log(x,y);
-      // console.log(event.target);
-      // console.log(event.target.tagName);
-      if((event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO') && event.target.parentElement.className !== 'photograph-header' ){
-        const photographerMedias = photographer.medias;
-        // console.log(photographerMedias);
-          const mediaId = event.target.id;
-          // console.log(mediaId);
-          const media = photographerMedias.find(media => media.id == mediaId);
-          // console.log(media);
-          const mediaIndex = photographerMedias.indexOf(media);
-          // console.log(mediaIndex);
-          openLightbox (photographerMedias, x, y, mediaIndex);
-      }
+    /**** */
 
-          // On incrémente une seule fois les compteurs de likes lorsqu'on clique dessus
-    // if (event.target.className === 'fa-solid fa-heart') {
-     
+    // On incrémente une seule fois les compteurs de likes lorsqu'on clique dessus
+    // if (event.targe t.className === 'fa-solid fa-heart') {
+
     //   const liked = event.target.parentElement;
-      
+
     //   if(!liked.classList.contains('liked')){
     //     liked.classList.add('liked');
     //     totalLikes ++;
@@ -102,10 +127,8 @@ async function init() {
     //     heartIcons.style.color = '#df00df';
     //   }
     // }
-
-
-})
-
+  });
+   
 }
 init();
 //L'attribut tabindex dans le contexte de la balise <img> est utilisé pour spécifier l'ordre de tabulation des éléments interactifs sur une page web. En d'autres termes, il détermine comment la navigation par tabulation (en utilisant la touche Tab) se comporte lorsque l'utilisateur parcourt les éléments de la page.
