@@ -1,0 +1,24 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": "airbnb-base",
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "import/extensions": ["error", "always", {
+            "js": "never'"
+          }],
+       "operator-linebreak": ["error", "before"],
+       "max-classes-per-file": ["error", 3],
+       "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "eqeqeq": ["error", "always"],
+        "no-param-reassign": ["error", { "props": true }],
+        "no-param-reassign": "off"
+
+
+    }
+}

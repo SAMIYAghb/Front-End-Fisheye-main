@@ -2,7 +2,7 @@
 
 //      async function getPhotographers() {
 //         try {
-//             const response = await fetch('../../data/photographers.json');           
+//             const response = await fetch('../../data/photographers.json');
 //             if (!response.ok) {
 //                 throw new Error(`Erreur HTTP: ${response.status}`);
 //             }
@@ -11,13 +11,13 @@
 //             // console.log(data);
 //             // console.log(data.photographers);
 //             // console.log(data.media);
-//             return data;   
+//             return data;
 //         } catch (error) {
 //             console.error('Erreur lors de la récupération des photographes:', error.message);
 //             // afficher un message à l'utilisateur ou effectuer une action spécifique.
 //         }
 //     }
-    
+
 //     // getPhotographers();
 //     async function displayData(photographers) {
 //         const photographersSection = document.querySelector(".photographer_section");
@@ -44,7 +44,7 @@
 //             // Réinitialisez le style visuel lorsqu'on quitte le focus
 //             link.style.outline = 'none';
 //         });
-        
+
 //         photographersSection.appendChild(link);
 //         });
 //     }
@@ -55,33 +55,29 @@
 //         // console.log(photographers);
 //         displayData(photographers);
 //     }
-    
+
 //     init();
-   
-import { getPhotographers } from '../utils/api.js';
+
+import getPhotographers from '../utils/api.js';
 import { photographerFactory } from '../factories/photographer.js';
 
 // Affiche les données des photographes
 function displayData(photographers) {
-    const photographersSection = document.querySelector(".photographer_section");
+  const photographersSection = document.querySelector('.photographer_section');
 
-    photographers.forEach((photographer) => {
-        const photographerModel = photographerFactory(photographer);
-        const userCardDOM = photographerModel.getUserCardDOM();
-        photographersSection.appendChild(userCardDOM);
-    });
+  photographers.forEach((photographer) => {
+    const photographerModel = photographerFactory(photographer);
+    const userCardDOM = photographerModel.getUserCardDOM();
+    photographersSection.appendChild(userCardDOM);
+  });
 }
 
 // Initialisation
 async function init() {
-    
-    
-    //On attend la récupération des données
-    const photographers = await getPhotographers();
-    // console.log(photographers);
-    displayData(photographers);
-
+  // On attend la récupération des données
+  const photographers = await getPhotographers();
+  // console.log(photographers);
+  displayData(photographers);
 }
 
 init();
-    
