@@ -42,6 +42,14 @@ async function init() {
   const params = new URL(document.location).searchParams;
   const photographerId = params.get('id');
 
+  // mettre le condition
+  // Vérifier si l'ID existe et est une valeur valide avant la création de la carte du média
+  //  if (!photographerId) {
+  //   // Redirection vers la page d'accueil si l'ID est inexistant ou incorrect
+  //   window.location.href = 'http://127.0.0.1:5500/index.html';
+  //   return null;
+  // }
+
   // Récupération de l'objet photographe correspondant avec ses medias
   const photographers = await getPhotographers();
   // console.log(photographers);
@@ -97,15 +105,6 @@ async function init() {
       const liked = event.target.parentElement;
       // console.log(liked);
 
-      // if(!liked.classList.contains('liked')){
-      //   liked.classList.add('liked');
-      //   totalLikes ++;
-      //   countLikes.innerText = `${totalLikes}`;
-      //   const likeCount = liked.querySelector('span');
-      //   likeCount.textContent = parseInt(likeCount.textContent) + 1;
-      //   const heartIcons = liked.querySelector('.fa-regular.fa-heart');
-      //   heartIcons.style.color = '#901ce1';
-      // }
       if (!liked.classList.contains('liked')) {
         liked.classList.add('liked');
         totalLikes += 1;
@@ -119,6 +118,7 @@ async function init() {
         const likeCount = liked.querySelector('span');
         likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
       }
+      // je vide le coeur et decremente le compte des likes
     }
   });
 }

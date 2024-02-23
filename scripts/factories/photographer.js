@@ -46,13 +46,6 @@ function mediaFactory(media) {
   } = media;
   // console.loag(url);
 
-  // Vérifier si l'ID existe et est une valeur valide avant la création de la carte du média
-  if (!id) {
-    // Redirection vers la page d'accueil si l'ID est inexistant ou incorrect
-    window.location.href = 'http://127.0.0.1:5500/index.html';
-    return null;
-  }
-
   function getMediaCardDOM() {
     const figure = document.createElement('figure');
     // remplacer les espaces par "%20" pour s'assurer que l'URI est correctement formaté.
