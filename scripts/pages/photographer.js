@@ -87,7 +87,7 @@ async function init() {
     // console.log(event.target);
     // console.log(event.target.tagName);
     if (
-      (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO')
+      (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO') 
       && event.target.parentElement.className !== 'photograph-header'
     ) {
       const photographerMedias = photographer.medias;

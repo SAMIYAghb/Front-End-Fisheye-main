@@ -6,14 +6,14 @@ function photographerFactory(data) {
   } = data;
 
   // Vérifier si l'ID existe et est une valeur valide avant la création de la carte du photographe
-  if (!id) {
-    // Redirection vers la page d'accueil si l'ID est inexistant
-    // ou incorrectconsole.log('Redirection vers la page d\'accueil car l\'ID est
-    // inexistant ou incorrect.');
+  // if (!id) {
+  // Redirection vers la page d'accueil si l'ID est inexistant
+  // ou incorrectconsole.log('Redirection vers la page d\'accueil car l\'ID est
+  // inexistant ou incorrect.');
 
-    window.location.href = 'http://127.0.0.1:5500';
-    return null;
-  }
+  //   window.location.href = 'http://127.0.0.1:5500';
+  //   return null;
+  // }
   // console.log(window.location.href);
 
   function getUserCardDOM() {
