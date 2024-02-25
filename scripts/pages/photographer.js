@@ -87,7 +87,7 @@ async function init() {
     // console.log(event.target);
     // console.log(event.target.tagName);
     if (
-      (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO') 
+      (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO')
       && event.target.parentElement.className !== 'photograph-header'
     ) {
       const photographerMedias = photographer.medias;
@@ -101,27 +101,111 @@ async function init() {
       openLightbox(photographerMedias, x, y, mediaIndex);
     }
     // On incrémente une seule fois les compteurs de likes lorsqu'on clique dessus
-    if (event.target.className === 'fa-regular fa-heart') {
-      const liked = event.target.parentElement;
-      // console.log(liked);
+    // if (event.target.className === 'fa-regular fa-heart') {
+    //   const liked = event.target.parentElement;
+    //   // console.log(liked);
 
+    //   if (!liked.classList.contains('liked')) {
+    //     liked.classList.add('liked');
+    //     totalLikes += 1;
+    //     countLikes.innerText = `${totalLikes}`;
+
+    //     // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
+    //     const heartIcons = liked.querySelector('.fa-regular.fa-heart');
+    //     heartIcons.classList.remove('fa-regular');
+    //     heartIcons.classList.add('fa-solid');
+    //     const likeCount = liked.querySelector('span');
+    //     likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
+    //   }
+    //   // je vide le coeur et decremente le compte des likes
+    // }
+  });
+  // Fonction pour gérer les événements de clic et de touche Entrée
+//   function handleLikeEvent(event) {
+//     // On incrémente une seule fois les compteurs de likes lorsqu'on clique dessus
+//     if (event.target.className === 'fa-regular fa-heart' || (event.key === 'Enter' && event.target.classList.contains('fa-regular') && event.target.parentElement.className === 'liked')) {
+//       const liked = event.target.parentElement;
+
+//       if (!liked.classList.contains('liked')) {
+//         liked.classList.add('liked');
+//         totalLikes += 1;
+//         countLikes.innerText = `${totalLikes}`;
+
+//         // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
+//         const heartIcons = liked.querySelector('.fa-regular.fa-heart');
+//         heartIcons.classList.remove('fa-regular');
+//         heartIcons.classList.add('fa-solid');
+
+//         const likeCount = liked.querySelector('span');
+//         likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
+//       }
+//       // je vide le coeur et decremente le compte des likes
+//     }
+//   }
+
+//   // Ajouter un écouteur d'événements pour les clics
+//   document.addEventListener('click', handleLikeEvent);
+
+//   // Ajouter un écouteur d'événements pour les touches Entrée
+//   document.addEventListener('keydown', handleLikeEvent);
+
+// }
+
+
+
+  let lastLikedElement = null;
+
+  // const countLikes = document.getElementById('countLikes'); // Assurez-vous d'ajuster l'ID en conséquence
+
+  function handleLikeEvent(event) {
+    const liked = event.target.parentElement;
+    const heartIcon = liked.querySelector('.fa-heart');
+
+    if (
+      (event.target.classList.contains('fa-regular') && liked && !liked.classList.contains('liked')) ||
+      (event.key === 'Enter' && liked && liked.classList.contains('liked'))
+    ) {
       if (!liked.classList.contains('liked')) {
+        // Première fois qu'on aime
         liked.classList.add('liked');
         totalLikes += 1;
         countLikes.innerText = `${totalLikes}`;
-
+  
         // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
         const heartIcons = liked.querySelector('.fa-regular.fa-heart');
         heartIcons.classList.remove('fa-regular');
         heartIcons.classList.add('fa-solid');
-
+  
         const likeCount = liked.querySelector('span');
         likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
+        lastLikedElement = liked;
+      } else if (lastLikedElement === liked) {
+        // Deuxième clic, annuler le like
+        liked.classList.remove('liked');
+        totalLikes -= 1;
+        countLikes.innerText = `${totalLikes}`;
+  
+        // Changer la classe de l'icône de cœur de 'fa-solid' à 'fa-regular'
+        
+        heartIcon.classList.remove('fa-solid');
+        heartIcon.classList.add('fa-regular');
+  
+        const likeCount = liked.querySelector('span');
+        likeCount.textContent = parseInt(likeCount.textContent, 10) - 1;
+        lastLikedElement = null;
       }
-      // je vide le coeur et decremente le compte des likes
+  
+      event.stopPropagation(); // Empêche la propagation de l'événement
     }
-  });
-}
+  }
+  
+
+  // Ajouter un écouteur d'événements pour les clics
+  document.addEventListener('click', handleLikeEvent);
+
+  // Ajouter un écouteur d'événements pour les touches Entrée
+  document.addEventListener('keydown', handleLikeEvent);}
+
 init();
 // L'attribut tabindex dans le contexte de
 // la balise <img> est utilisé pour spécifier l'ordre de tabulation
