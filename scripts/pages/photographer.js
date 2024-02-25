@@ -23,6 +23,11 @@ function headerPhotographer(photographer) {
   photographeHeader.appendChild(img);
 }
 
+const sortImagesSelect = document.getElementById('sort-images-select');
+const sortImagesButton = document.getElementById('sort-images-button');
+const dropdownOptions = sortImagesSelect.querySelectorAll('li');
+const sortDropdown = sortImagesSelect.parentElement;
+
 // Fonction pour afficher la galerie d'images
 function displayMedia(medias) {
   const imagesContainer = document.getElementById('photographer-images');
@@ -35,6 +40,9 @@ function displayMedia(medias) {
     imagesContainer.appendChild(mediaCardDOM);
   });
 }
+
+// Fonction de sélection du filtre (par click ou par touches)
+
 
 // Fonction d'initialisation
 async function init() {
@@ -86,6 +94,21 @@ async function init() {
     // console.log(x,y);
     // console.log(event.target);
     // console.log(event.target.tagName);
+
+    // click sur le bouton du filtre
+    
+    if (event.target.id === 'sort-images-button') {
+      sortImagesButton.setAttribute('aria-expanded', 'true');
+      sortImagesButton.classList.toggle('active');
+      sortImagesSelect.classList.toggle('active');
+      dropdownOptions[0].focus();
+    }
+
+    // click sur les choix du filtre
+    if (event.target.tagName === 'LI') {
+      selectedFilter(event.target, photographer.medias);
+    }
+
     if (
       (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO')
       && event.target.parentElement.className !== 'photograph-header'
@@ -170,12 +193,10 @@ async function init() {
         liked.classList.add('liked');
         totalLikes += 1;
         countLikes.innerText = `${totalLikes}`;
-  
         // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
         const heartIcons = liked.querySelector('.fa-regular.fa-heart');
         heartIcons.classList.remove('fa-regular');
         heartIcons.classList.add('fa-solid');
-  
         const likeCount = liked.querySelector('span');
         likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
         lastLikedElement = liked;
@@ -184,28 +205,22 @@ async function init() {
         liked.classList.remove('liked');
         totalLikes -= 1;
         countLikes.innerText = `${totalLikes}`;
-  
         // Changer la classe de l'icône de cœur de 'fa-solid' à 'fa-regular'
-        
         heartIcon.classList.remove('fa-solid');
         heartIcon.classList.add('fa-regular');
-  
         const likeCount = liked.querySelector('span');
         likeCount.textContent = parseInt(likeCount.textContent, 10) - 1;
         lastLikedElement = null;
       }
-  
       event.stopPropagation(); // Empêche la propagation de l'événement
     }
   }
-  
-
   // Ajouter un écouteur d'événements pour les clics
   document.addEventListener('click', handleLikeEvent);
 
   // Ajouter un écouteur d'événements pour les touches Entrée
-  document.addEventListener('keydown', handleLikeEvent);}
-
+  document.addEventListener('keydown', handleLikeEvent);
+}
 init();
 // L'attribut tabindex dans le contexte de
 // la balise <img> est utilisé pour spécifier l'ordre de tabulation
