@@ -163,9 +163,11 @@ async function getPhotographers() {
         // media.url = `assets/images/${tmpName}/small/${tmpUrl}`
         media.url = `assets/images/${tmpName}/${tmpUrl}`;
         photographer.medias.push(media);
+        // console.log(media.url);
       } else {
         media.url = `assets/images/${tmpName}/${tmpUrl}`;
         photographer.medias.push(media);
+        // console.log(media.url);
       }
     }
   });

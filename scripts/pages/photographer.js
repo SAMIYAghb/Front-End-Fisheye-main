@@ -94,7 +94,7 @@ async function init() {
       // console.log(photographerMedias);
       const mediaId = event.target.id;
       // console.log(mediaId);
-      const media = photographerMedias.find((media) => media.id === mediaId);
+      const media = photographerMedias.find((media) => media.id == mediaId);
       // console.log(media);
       const mediaIndex = photographerMedias.indexOf(media);
       // console.log(mediaIndex);
