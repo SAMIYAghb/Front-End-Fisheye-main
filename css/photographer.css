@@ -1,6 +1,4 @@
-#contact_modal {
-  display: none;
-}
+
 
 .photograph-header {
   background-color: #fafafa;
@@ -26,60 +24,20 @@
   cursor: pointer;
   margin-left: -232px;
 }
-
-.modal {
-  border-radius: 5px;
-  background-color: #db8876;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 35px;
-  margin: auto;
-}
-
-.modal header {
-  justify-content: space-between;
-  width: 100%;
-}
-
-.modal header img {
-  cursor: pointer;
-}
-
-.modal header h2 {
-  font-size: 64px;
-  font-weight: normal;
-  text-align: center;
-}
-
-form {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-form label {
-  color: #312e2e;
-  font-size: 36px;
-}
-
-form div {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: self-start;
-  margin-bottom: 26px;
-}
-
-form input {
-  width: 100%;
-  height: 68px;
+.contact_button_send{
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  width: 170px;
+  height: 70px;
   border: none;
+  background-color: #901c1c;
   border-radius: 5px;
+  cursor: pointer;
+  /* margin-left: -232px; */
 }
+
 
 /***** photographer Header *****/
 /* .photographer_avatar{
@@ -390,3 +348,79 @@ main figcaption {
 .dropdown-menu[aria-expanded="true"] button::after {
   content: "\25B4";
 }
+
+/********Modal***********/
+#contact_modal {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+.modal {
+  border-radius: 5px;
+  background-color: #db8876;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 35px;
+  margin: auto;
+}
+
+.modal header {
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modal header img {
+  cursor: pointer;
+  width: 32px;
+}
+
+.modal header h2 ,#contact_modal p{
+  font-size: 40px;
+  font-weight: normal;
+  /* text-align: center; */
+  /* margin-bottom: 0; */
+}
+#contact_modal p{
+  margin-top: 0;
+  padding-top: 0;
+
+}
+form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 30px;
+}
+
+form label {
+  color: #312e2e;
+  font-size: 36px;
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+  margin-bottom: 26px;
+}
+
+form input, textarea {
+  width: 100%;
+  height: 68px;
+  border: none;
+  border-radius: 5px;
+}
+
+

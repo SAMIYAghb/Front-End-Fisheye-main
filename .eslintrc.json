@@ -15,9 +15,9 @@
     //    "operator-linebreak": ["error", "before"],
         "eqeqeq": ["error", "always"],
         // "no-param-reassign": ["error", { "props": true }],
-        "no-param-reassign": "off",
+        "no-param-reassign": "off"
         
-            "max-classes-per-file": ["error", 3]
+            // "max-classes-per-file": ["error", 3]
         
 
 

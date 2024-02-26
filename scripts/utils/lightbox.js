@@ -1,24 +1,15 @@
 // Ouverture de la lightbox
 function openLightbox(medias, x, y, currentIndex) {
-  // console.log('hhh');
-  console.log(medias, x, y, currentIndex);
   // l'affiche de l'a bonne 'imagequi correspond  à l'index dans le tableau des medias
   if (!medias || medias.length === 0 || currentIndex < 0 || currentIndex >= medias.length) {
-    console.error('Index invalide ou tableau medias incorrect.');
     return;
   }
 
   function showMedia() {
-    console.log(medias[0].url)
-    console.log(currentIndex)
     const { url } = medias[currentIndex];
-    console.log(url);
     const { title } = medias[currentIndex];
-    console.log(title);
     const lightboxImg = document.querySelector('.lightbox-img');
-    console.log(lightboxImg);
     const lightboxImgContainer = lightboxImg.parentElement;
-    console.log(lightboxImgContainer);
 
     // soit  'img' ou 'video'
     if (medias[currentIndex].type === 'image') {

@@ -1,4 +1,4 @@
-import getPhotographers from '../utils/api.js';
+import getPhotographers from '../utils/getPhotographers.js';
 import {
   photographerFactory,
   mediaFactory,
@@ -33,7 +33,6 @@ function displayMedia(medias) {
   const imagesContainer = document.getElementById('photographer-images');
   // console.log(imagesContainer);
   imagesContainer.innerHTML = '';
-  // console.log(medias);
   medias.forEach((media) => {
     const mediaModel = mediaFactory(media);
     const mediaCardDOM = mediaModel.getMediaCardDOM();
@@ -49,7 +48,7 @@ async function init() {
   // Récupération de l'ID du photographe
   const params = new URL(document.location).searchParams;
   const photographerId = params.get('id');
-
+  console.log('photographerId:', photographerId);
   // mettre le condition
   // Vérifier si l'ID existe et est une valeur valide avant la création de la carte du média
   //  if (!photographerId) {
@@ -60,12 +59,7 @@ async function init() {
 
   // Récupération de l'objet photographe correspondant avec ses medias
   const photographers = await getPhotographers();
-  // console.log(photographers);
   const photographer = photographers.find((item) => item.id == photographerId);
-  // const photographerMedias = photographer.medias;
-  // console.log(photographer.medias);
-  // console.log('photographer avec ses medias:',photographer);
-  // console.log(' ses medias:',photographer.medias);
   // affichage le header du photographe
   headerPhotographer(photographer);
   //   const sortedMedias = sortMediaBy('likes',photographer.medias);
@@ -75,12 +69,9 @@ async function init() {
   // afficher le nombre du like et le tarif
   // Récupération des valeurs pour la bannière des likes
   const countLikes = document.querySelector('.count-likes');
-  // console.log(countLikes);
   const tarif = document.querySelector('.tarif');
-  // console.log(tarif);
   // On tag le total des likes et du tarif journalier dans la bannière
   let totalLikes = photographer.medias.reduce((sum, obj) => sum + obj.likes, 0);
-  // console.log(totalLikes);
   countLikes.innerText = totalLikes;
   // countLikes.innerText = `${totalLikes}`;
   tarif.innerText = `${photographer.price}€/jour`;
@@ -91,12 +82,9 @@ async function init() {
     //  récupèration des coordonnées du click
     const x = event.clientX;
     const y = event.clientY;
-    // console.log(x,y);
-    // console.log(event.target);
     // console.log(event.target.tagName);
 
     // click sur le bouton du filtre
-    
     if (event.target.id === 'sort-images-button') {
       sortImagesButton.setAttribute('aria-expanded', 'true');
       sortImagesButton.classList.toggle('active');
@@ -114,13 +102,9 @@ async function init() {
       && event.target.parentElement.className !== 'photograph-header'
     ) {
       const photographerMedias = photographer.medias;
-      // console.log(photographerMedias);
       const mediaId = event.target.id;
-      // console.log(mediaId);
       const media = photographerMedias.find((media) => media.id == mediaId);
-      // console.log(media);
       const mediaIndex = photographerMedias.indexOf(media);
-      // console.log(mediaIndex);
       openLightbox(photographerMedias, x, y, mediaIndex);
     }
     // On incrémente une seule fois les compteurs de likes lorsqu'on clique dessus
