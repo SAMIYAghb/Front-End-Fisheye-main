@@ -1,7 +1,7 @@
 // getPhotographers.js
 import Api from './api.js';
-import Photographer from './photographer.js';
-import Media from './media.js';
+import Photographer from './Photographer.js';
+import Media from './Media.js';
 
 async function getPhotographers() {
   const api = new Api('./data/photographers.json');

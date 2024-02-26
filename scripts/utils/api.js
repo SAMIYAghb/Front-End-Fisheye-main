@@ -175,11 +175,7 @@
 // }
 // // export { getPhotographers };
 // export default getPhotographers;
-
-
-
-
-/*********** */
+/**/
 // import Photographer from './Photographer.js';
 // import Media from './Media.js';
 
@@ -322,7 +318,6 @@
 //     const photographer = photographers.find((p) => p.id === media.photographerId);
 //     const tmpName = photographer.name;
 //     const tmpUrl = media.url;
-    
 //     if (photographer) {
 //       if (media.type === 'image' || media.type === 'video') {
 //         media.url = `assets/images/${tmpName}/${tmpUrl}`;
@@ -335,7 +330,6 @@
 // }
 
 // export default getPhotographers;
-
 
 // api.js
 class Api {

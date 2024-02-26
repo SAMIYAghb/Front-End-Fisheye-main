@@ -1,6 +1,5 @@
 import getPhotographers from '../utils/getPhotographers.js';
 import {
-  photographerFactory,
   mediaFactory,
 } from '../factories/photographer.js';
 import openLightbox from '../utils/lightbox.js';
@@ -26,7 +25,7 @@ function headerPhotographer(photographer) {
 const sortImagesSelect = document.getElementById('sort-images-select');
 const sortImagesButton = document.getElementById('sort-images-button');
 const dropdownOptions = sortImagesSelect.querySelectorAll('li');
-const sortDropdown = sortImagesSelect.parentElement;
+// const sortDropdown = sortImagesSelect.parentElement;
 
 // Fonction pour afficher la galerie d'images
 function displayMedia(medias) {
@@ -42,13 +41,12 @@ function displayMedia(medias) {
 
 // Fonction de sélection du filtre (par click ou par touches)
 
-
 // Fonction d'initialisation
 async function init() {
   // Récupération de l'ID du photographe
   const params = new URL(document.location).searchParams;
   const photographerId = params.get('id');
-  console.log('photographerId:', photographerId);
+  // console.log('photographerId:', photographerId);
   // mettre le condition
   // Vérifier si l'ID existe et est une valeur valide avant la création de la carte du média
   //  if (!photographerId) {
@@ -59,7 +57,9 @@ async function init() {
 
   // Récupération de l'objet photographe correspondant avec ses medias
   const photographers = await getPhotographers();
+  /* eslint-disable eqeqeq */
   const photographer = photographers.find((item) => item.id == photographerId);
+  /* eslint-enable eqeqeq */
   // affichage le header du photographe
   headerPhotographer(photographer);
   //   const sortedMedias = sortMediaBy('likes',photographer.medias);
@@ -94,7 +94,7 @@ async function init() {
 
     // click sur les choix du filtre
     if (event.target.tagName === 'LI') {
-      selectedFilter(event.target, photographer.medias);
+      // selectedFilter(event.target, photographer.medias);
     }
 
     if (
@@ -103,7 +103,9 @@ async function init() {
     ) {
       const photographerMedias = photographer.medias;
       const mediaId = event.target.id;
-      const media = photographerMedias.find((media) => media.id == mediaId);
+      /* eslint-disable eqeqeq */
+      const media = photographerMedias.find((medi) => medi.id == mediaId);
+      /* eslint-enable eqeqeq */
       const mediaIndex = photographerMedias.indexOf(media);
       openLightbox(photographerMedias, x, y, mediaIndex);
     }
@@ -127,50 +129,20 @@ async function init() {
     //   // je vide le coeur et decremente le compte des likes
     // }
   });
-  // Fonction pour gérer les événements de clic et de touche Entrée
-//   function handleLikeEvent(event) {
-//     // On incrémente une seule fois les compteurs de likes lorsqu'on clique dessus
-//     if (event.target.className === 'fa-regular fa-heart' || (event.key === 'Enter' && event.target.classList.contains('fa-regular') && event.target.parentElement.className === 'liked')) {
-//       const liked = event.target.parentElement;
-
-//       if (!liked.classList.contains('liked')) {
-//         liked.classList.add('liked');
-//         totalLikes += 1;
-//         countLikes.innerText = `${totalLikes}`;
-
-//         // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
-//         const heartIcons = liked.querySelector('.fa-regular.fa-heart');
-//         heartIcons.classList.remove('fa-regular');
-//         heartIcons.classList.add('fa-solid');
-
-//         const likeCount = liked.querySelector('span');
-//         likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
-//       }
-//       // je vide le coeur et decremente le compte des likes
-//     }
-//   }
-
-//   // Ajouter un écouteur d'événements pour les clics
-//   document.addEventListener('click', handleLikeEvent);
-
-//   // Ajouter un écouteur d'événements pour les touches Entrée
-//   document.addEventListener('keydown', handleLikeEvent);
-
-// }
-
-
 
   let lastLikedElement = null;
 
-  // const countLikes = document.getElementById('countLikes'); // Assurez-vous d'ajuster l'ID en conséquence
+  // const countLikes = document.getElementById('countLikes');
+  // Assurez-vous d'ajuster l'ID en conséquence
 
   function handleLikeEvent(event) {
     const liked = event.target.parentElement;
     const heartIcon = liked.querySelector('.fa-heart');
 
     if (
-      (event.target.classList.contains('fa-regular') && liked && !liked.classList.contains('liked')) ||
-      (event.key === 'Enter' && liked && liked.classList.contains('liked'))
+      (event.target.classList.contains('fa-regular') && liked
+      && !liked.classList.contains('liked'))
+      || (event.key === 'Enter' && liked && liked.classList.contains('liked'))
     ) {
       if (!liked.classList.contains('liked')) {
         // Première fois qu'on aime
