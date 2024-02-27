@@ -1,13 +1,23 @@
 /* eslint no-unused-vars:"off" */
-function displayModal() {
+function displayModal(event) {
   const modal = document.getElementById('contact_modal');
+  // Vérifie si la touche appuyée est la touche Entrée
+  // if (event.key === 'Enter') {
+  //   event.preventDefault();
+  //   return;
+  // }
   modal.style.display = 'flex';
   const photographerName = document.querySelector('.photograph-name');
   const photographerContact = document.querySelector('.modal p');
   photographerContact.innerText = `${photographerName.innerText}`;
+  // Focus sur l'image de fermeture
+  const closeButton = document.querySelector('.modal img');
+  console.log(closeButton);
+
+  closeButton.focus();
 
   //Le focus devrait être positionné sur le premier champ de saisie lorsque la modale est affichée.
-  document.getElementById('prenom').focus();
+  // document.getElementById('prenom').focus();
 }
 
 function closeModal() {
@@ -88,3 +98,15 @@ function sendForm(event) {
 
 // Add event listener to the form
 form.addEventListener('submit', sendForm);
+
+// Ajoutez un gestionnaire d'événements clavier pour le formulaire
+document.getElementById('contact_form').addEventListener('keydown', function handleFormKeyEvents(event) {
+  // Gérer les touches Enter pour soumettre le formulaire
+  if (event.key === 'Enter' && document.activeElement.tagName === 'INPUT') {
+    document.activeElement.click();
+  }
+});
+
+
+
+
