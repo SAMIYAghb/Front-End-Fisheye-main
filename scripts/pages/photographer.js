@@ -78,6 +78,7 @@ async function init() {
 
   // Evenement 'click' sur toute la partie main
   const main = document.getElementById('main');
+
   main.addEventListener('click', (event) => {
     //  récupèration des coordonnées du click
     const x = event.clientX;
@@ -109,6 +110,7 @@ async function init() {
       const mediaIndex = photographerMedias.indexOf(media);
       openLightbox(photographerMedias, x, y, mediaIndex);
     }
+
     // On incrémente une seule fois les compteurs de likes lorsqu'on clique dessus
     // if (event.target.className === 'fa-regular fa-heart') {
     //   const liked = event.target.parentElement;
@@ -177,6 +179,7 @@ async function init() {
   // Ajouter un écouteur d'événements pour les touches Entrée
   document.addEventListener('keydown', handleLikeEvent);
 }
+
 init();
 // L'attribut tabindex dans le contexte de
 // la balise <img> est utilisé pour spécifier l'ordre de tabulation
