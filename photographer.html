@@ -77,22 +77,25 @@
           alt="Fermer la modale"
           />
         </header>
-				<form  onsubmit="sendForm()">
+				<form onsubmit="sendForm(event)">
 					<div>
 						<label id="prenom_label" for="prenom">Prénom</label>
 						<input
+            aria-labelledby="prenom_label"
             aria-label="First name" 
              type="text" id="prenom"/>
 					</div>
           <div>
 						<label id="nom_label" for="nom">Nom</label>
 						<input
+            aria-labelledby="nom_label"
             aria-label="Last name" 
              type="text" id="nom"/>
 					</div>
           <div>
 						<label id="email_label" for="email">Email</label>
 						<input
+            aria-labelledby="email_label"
             aria-label="Email" 
              type="text" id="email"/>
 					</div>
@@ -106,6 +109,7 @@
 					</div>
           
           <button 
+          aria-labelledby="envoyer_label"
           aria-label="Send" class="contact_button_send">Envoyer</button>
 				</form>
 			</div>
