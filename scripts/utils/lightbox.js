@@ -39,7 +39,6 @@ function openLightbox(medias, x, y, currentIndex) {
   const borderLightbox = document.querySelector('.border-lightbox');
 
   showMedia();
-
   // animation apre ouvrture de la lightbox utilisant le click de la souris
   lightbox.style.top = `${y}px`;
   lightbox.style.left = `${x}px`;
@@ -90,13 +89,52 @@ function openLightbox(medias, x, y, currentIndex) {
     if (event.key === 'ArrowLeft') {
       prevButton.click();
     }
-
     if (event.key === 'ArrowRight') {
       nextButton.click();
     }
-
     if (event.key === 'Escape') {
       closeButton.click();
+    }
+    // Gestion des touches Enter pour fermer la modal, passer à la photo précédente et suivante
+    if (event.key === 'Enter') {
+      if (document.activeElement === closeButton) {
+        // Si le focus est sur le bouton de fermeture, fermer la modal
+        closeButton.click();
+      } else if (document.activeElement === prevButton) {
+        // Si le focus est sur le bouton "prev", passer à la photo précédente
+        prevButton.click();
+      } else if (document.activeElement === nextButton) {
+        // Si le focus est sur le bouton "next", passer à la photo suivante
+        nextButton.click();
+      }
+    }
+  });
+
+  // Ajoutez des attributs tabindex aux éléments de la lightbox pour les rendre focusables.
+
+  const lightboxElements = document.querySelectorAll('.lightbox [tabindex]:not([tabindex="-1"])');
+  const firstLightboxElement = lightboxElements[0];
+  const lastLightboxElement = lightboxElements[lightboxElements.length - 1];
+  firstLightboxElement.focus();
+
+  document.addEventListener('keydown', (event) => {
+    // Vérifie si la touche enfoncée est la touche Tab
+    const isTabPressed = event.key === 'Tab' || event.keyCode === 9;
+    // Si la touche n'est pas Tab, la fonction ne fait rien
+    if (!isTabPressed) {
+      return;
+    }
+    // Si la touche Shift est enfoncée (Shift + Tab)
+    if (event.shiftKey) {
+      // Si le focus est sur le premier élément, passe au dernier élément
+      if (document.activeElement === firstLightboxElement) {
+        lastLightboxElement.focus();
+        event.preventDefault(); // Empêche le déplacement normal du focus
+      }
+      // Si le focus est sur le dernier élément, passe au premier élément
+    } else if (document.activeElement === lastLightboxElement) {
+      firstLightboxElement.focus();
+      event.preventDefault(); // Empêche le déplacement normal du focus
     }
   });
 }
