@@ -72,7 +72,8 @@
           <h2>Contactez-moi</h2>
           <p></p>
         </div>
-          <img src="assets/icons/close.svg" 
+          <img src="assets/icons/close.svg"
+          class="modal-form-img" 
           tabindex="0"
           onclick="closeModal()" 
           alt="Fermer la modale"
@@ -82,6 +83,7 @@
 					<div>
 						<label id="prenom_label" for="prenom">Prénom</label>
 						<input
+            tabindex="0"
             aria-labelledby="prenom_label"
             aria-label="First name" 
              type="text" id="prenom"/>
@@ -89,6 +91,7 @@
           <div>
 						<label id="nom_label" for="nom">Nom</label>
 						<input
+            tabindex="0"
             aria-labelledby="nom_label"
             aria-label="Last name" 
              type="text" id="nom"/>
@@ -96,6 +99,7 @@
           <div>
 						<label id="email_label" for="email">Email</label>
 						<input
+            tabindex="0"
             aria-labelledby="email_label"
             aria-label="Email" 
              type="text" id="email"/>
@@ -103,6 +107,7 @@
           <div>
 						<label id="message_label" for="message">Votre message</label>
 						<textarea
+            tabindex="0"
             aria-label="Your message"
              type="text" id="message"
              rows="5" required minlength="10" aria-labelledby="message_label">
@@ -110,6 +115,7 @@
 					</div>
           
           <button 
+          tabindex="0"
           aria-labelledby="envoyer_label"
           aria-label="Send" class="contact_button_send">Envoyer</button>
 				</form>
