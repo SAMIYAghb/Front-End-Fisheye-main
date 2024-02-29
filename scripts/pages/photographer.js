@@ -21,7 +21,7 @@ function headerPhotographer(photographer) {
   img.classList.add('img-rounded');
   photographeHeader.appendChild(img);
 }
-console.log(openLightbox)
+// console.log(openLightbox);
 const sortImagesSelect = document.getElementById('sort-images-select');
 const sortImagesButton = document.getElementById('sort-images-button');
 const dropdownOptions = sortImagesSelect.querySelectorAll('li');
@@ -80,35 +80,33 @@ async function init() {
   const main = document.getElementById('main');
 
   main.addEventListener('click', (event) => {
-
     const isMediaElement = event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO';
     const isLikeButton = event.target.classList.contains('fa-heart');
 
     if (isMediaElement) {
-        // Gérer le clic sur les médias (si nécessaire)
-        //  récupèration des coordonnées du click
-    const x = event.clientX;
-    const y = event.clientY;
-    // console.log(event.target.tagName);
-    if (
-      (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO')
+      // Gérer le clic sur les médias (si nécessaire)
+      //  récupèration des coordonnées du click
+      const x = event.clientX;
+      const y = event.clientY;
+      // console.log(event.target.tagName);
+      if (
+        (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO')
       && event.target.parentElement.className !== 'photograph-header'
-    ) {
-      const photographerMedias = photographer.medias;
-      const mediaId = event.target.id;
-      /* eslint-disable eqeqeq */
-      const media = photographerMedias.find((medi) => medi.id == mediaId);
-      /* eslint-enable eqeqeq */
-      const mediaIndex = photographerMedias.indexOf(media);
-      openLightbox(photographerMedias, x, y, mediaIndex);
-    }
-
+      ) {
+        const photographerMedias = photographer.medias;
+        const mediaId = event.target.id;
+        /* eslint-disable eqeqeq */
+        const media = photographerMedias.find((medi) => medi.id == mediaId);
+        /* eslint-enable eqeqeq */
+        const mediaIndex = photographerMedias.indexOf(media);
+        openLightbox(photographerMedias, x, y, mediaIndex);
+      }
     }
     if (isLikeButton) {
       // Gérer le clic sur le bouton "like"
       handleLikeEvent(event);
-  }
-    
+    }
+
     // click sur le bouton du filtre
     if (event.target.id === 'sort-images-button') {
       sortImagesButton.setAttribute('aria-expanded', 'true');
@@ -121,129 +119,32 @@ async function init() {
     if (event.target.tagName === 'LI') {
       // selectedFilter(event.target, photographer.medias);
     }
-
-    
   });
-
 
   // lancer la lightbox en cliquant sur Entrée
   const imagesContainer = document.getElementById('photographer-images');
-// console.log(imagesContainer)
-// imagesContainer.addEventListener('keydown', function(event) {
-//   // event.preventDefault();
-//   event.stopPropagation(); // Arrête la propagation de l'événement
-//   // console.log('Keydown event triggered');
-//   // console.log(event)
-//   // console.log(event.target)
-//   if ((event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO') && (event.key === 'Enter')) {
-//     event.preventDefault();
-//     console.log('ddd')
-//     console.log('Keydown event triggered');
-//     console.log('TagName:', event.target.tagName);
-//     console.log('Key:', event.key);
-  
-//     const photographerMedias = photographer.medias;
-//     // console.log(photographerMedias)
-//     const mediaId = event.target.id;
-//     // console.log(mediaId)
-//     const media = photographerMedias.find(media => media.id == mediaId);
-//     // console.log(media)
-//     const mediaIndex = photographerMedias.indexOf(media);
-//     // console.log(mediaIndex)
-//     const x = window.innerWidth / 2;
-//     // console.log(x,"x")
-//     const y = window.innerHeight / 2;
-//     openLightbox(photographerMedias, x, y, mediaIndex);
-//   }
-// })
 
-imagesContainer.addEventListener('keydown', function(event) {
-  console.log('yyyyy')
-  const isMediaElement = event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO';
-
-  if (isMediaElement && (event.key === 'Enter' || event.key === ' ')) {
+  imagesContainer.addEventListener('keydown', (event) => {
+    // console.log('yyyyy');
+    const isMediaElement = event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO';
+    if (isMediaElement && (event.key === 'Enter' || event.key === ' ')) {
       event.preventDefault();
-      event.stopPropagation();  
+      event.stopPropagation();
       // Gérer l'événement pour les médias (ouvrir la lightbox, par exemple)
       const photographerMedias = photographer.medias;
       const mediaId = event.target.id;
-      const media = photographerMedias.find(media => media.id == mediaId);
+      /* eslint-disable eqeqeq */
+      const media = photographerMedias.find((medi) => medi.id == mediaId);
+      /* eslint-enable eqeqeq */
       const mediaIndex = photographerMedias.indexOf(media);
       const x = window.innerWidth / 2;
       const y = window.innerHeight / 2;
       openLightbox(photographerMedias, x, y, mediaIndex);
-  }
-});
+    }
+  });
 
-
-
-
-
-
+  // likes
   let lastLikedElement = null;
-
-  // const countLikes = document.getElementById('countLikes');
-  // Assurez-vous d'ajuster l'ID en conséquence
-
-  // function handleLikeEvent(event) {
-  //   // console.log('Type d\'événement :', event.type);
-  //   const liked = event.target.parentElement;
-  //   if (
-  //     (event.target.classList.contains('fa-regular') && liked
-  //     && !liked.classList.contains('liked'))
-  //     || (event.key === 'Enter' && liked && liked.classList.contains('liked'))
-  //   ) {
-  //     if (!liked.classList.contains('liked')) {
-  //       // Première fois qu'on aime
-  //       liked.classList.add('liked');
-  //       totalLikes += 1;
-  //       countLikes.innerText = `${totalLikes}`;
-  //       // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
-  //       const heartIcons = liked.querySelector('.fa-regular.fa-heart');
-  //       // console.log(heartIcons, 'heartIcons');
-  //       heartIcons.classList.remove('fa-regular');
-  //       heartIcons.classList.add('fa-solid');
-  //       const likeCount = liked.querySelector('span');
-  //       likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
-  //       lastLikedElement = liked;
-  //     } else if (lastLikedElement === liked) {
-  //       // Deuxième clic, annuler le like
-  //       liked.classList.remove('liked');
-  //       totalLikes -= 1;
-  //       countLikes.innerText = `${totalLikes}`;
-  //       // Changer la classe de l'icône de cœur de 'fa-solid' à 'fa-regular'
-  //       const heartIcon = liked.querySelector('.fa-solid.fa-heart');
-  //       // console.log(heartIcon, 'heartIcon');
-  //       heartIcon.classList.remove('fa-solid');
-  //       heartIcon.classList.add('fa-regular');
-  //       const likeCount = liked.querySelector('span');
-  //       likeCount.textContent = parseInt(likeCount.textContent, 10) - 1;
-  //       lastLikedElement = null;
-  //     }
-  //     event.stopPropagation(); // Empêche la propagation de l'événement
-  //   }
-  // }
- 
-  // // Ajouter un écouteur d'événements pour les clics
-  // document.addEventListener('click', handleLikeEvent);
-
-  // // Ajouter un écouteur d'événements pour les touches Entrée
-  // document.addEventListener('keydown', handleLikeEvent);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function handleLikeClick(event) {
     const liked = event.target.parentElement;
     if (
@@ -277,7 +178,7 @@ imagesContainer.addEventListener('keydown', function(event) {
       event.stopPropagation(); // Empêche la propagation de l'événement
     }
   }
-  
+
   function handleLikeEnter(event) {
     if (event.key === 'Enter') {
       const liked = event.target.parentElement;
@@ -313,13 +214,12 @@ imagesContainer.addEventListener('keydown', function(event) {
       }
     }
   }
-  
+
   // Ajouter un écouteur d'événements pour les clics
   document.addEventListener('click', handleLikeClick);
-  
+
   // Ajouter un écouteur d'événements pour les touches Entrée
   document.addEventListener('keydown', handleLikeEnter);
-
 }
 
 init();
