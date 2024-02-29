@@ -175,45 +175,128 @@ imagesContainer.addEventListener('keydown', function(event) {
   }
 });
 
-  main.addEventListener('keydown', function(event) {
-    const isLikeButton = event.target.classList.contains('fa-heart');
-
-    if (isLikeButton && (event.key === 'Enter' || event.key === ' ')) {
-      // Gérer l'événement keydown pour les boutons "like"
-      handleLikeEvent(event);
-    }
-  });
 
 
 
 
-  
+
   let lastLikedElement = null;
 
   // const countLikes = document.getElementById('countLikes');
   // Assurez-vous d'ajuster l'ID en conséquence
 
-  function handleLikeEvent(event) {
-    // console.log('Type d\'événement :', event.type);
+  // function handleLikeEvent(event) {
+  //   // console.log('Type d\'événement :', event.type);
+  //   const liked = event.target.parentElement;
+  //   if (
+  //     (event.target.classList.contains('fa-regular') && liked
+  //     && !liked.classList.contains('liked'))
+  //     || (event.key === 'Enter' && liked && liked.classList.contains('liked'))
+  //   ) {
+  //     if (!liked.classList.contains('liked')) {
+  //       // Première fois qu'on aime
+  //       liked.classList.add('liked');
+  //       totalLikes += 1;
+  //       countLikes.innerText = `${totalLikes}`;
+  //       // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
+  //       const heartIcons = liked.querySelector('.fa-regular.fa-heart');
+  //       // console.log(heartIcons, 'heartIcons');
+  //       heartIcons.classList.remove('fa-regular');
+  //       heartIcons.classList.add('fa-solid');
+  //       const likeCount = liked.querySelector('span');
+  //       likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
+  //       lastLikedElement = liked;
+  //     } else if (lastLikedElement === liked) {
+  //       // Deuxième clic, annuler le like
+  //       liked.classList.remove('liked');
+  //       totalLikes -= 1;
+  //       countLikes.innerText = `${totalLikes}`;
+  //       // Changer la classe de l'icône de cœur de 'fa-solid' à 'fa-regular'
+  //       const heartIcon = liked.querySelector('.fa-solid.fa-heart');
+  //       // console.log(heartIcon, 'heartIcon');
+  //       heartIcon.classList.remove('fa-solid');
+  //       heartIcon.classList.add('fa-regular');
+  //       const likeCount = liked.querySelector('span');
+  //       likeCount.textContent = parseInt(likeCount.textContent, 10) - 1;
+  //       lastLikedElement = null;
+  //     }
+  //     event.stopPropagation(); // Empêche la propagation de l'événement
+  //   }
+  // }
+ 
+  // // Ajouter un écouteur d'événements pour les clics
+  // document.addEventListener('click', handleLikeEvent);
+
+  // // Ajouter un écouteur d'événements pour les touches Entrée
+  // document.addEventListener('keydown', handleLikeEvent);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  function handleLikeClick(event) {
     const liked = event.target.parentElement;
     if (
-      (event.target.classList.contains('fa-regular') && liked
-      && !liked.classList.contains('liked'))
-      || (event.key === 'Enter' && liked && liked.classList.contains('liked'))
+      event.target.classList.contains('fa-regular') && liked
+      && !liked.classList.contains('liked')
     ) {
-      if (!liked.classList.contains('liked')) {
+      // Première fois qu'on aime
+      liked.classList.add('liked');
+      totalLikes += 1;
+      countLikes.innerText = `${totalLikes}`;
+      // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
+      const heartIcons = liked.querySelector('.fa-regular.fa-heart');
+      heartIcons.classList.remove('fa-regular');
+      heartIcons.classList.add('fa-solid');
+      const likeCount = liked.querySelector('span');
+      likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
+      lastLikedElement = liked;
+      event.stopPropagation(); // Empêche la propagation de l'événement
+    } else if (lastLikedElement === liked) {
+      // Deuxième clic, annuler le like
+      liked.classList.remove('liked');
+      totalLikes -= 1;
+      countLikes.innerText = `${totalLikes}`;
+      // Changer la classe de l'icône de cœur de 'fa-solid' à 'fa-regular'
+      const heartIcon = liked.querySelector('.fa-solid.fa-heart');
+      heartIcon.classList.remove('fa-solid');
+      heartIcon.classList.add('fa-regular');
+      const likeCount = liked.querySelector('span');
+      likeCount.textContent = parseInt(likeCount.textContent, 10) - 1;
+      lastLikedElement = null;
+      event.stopPropagation(); // Empêche la propagation de l'événement
+    }
+  }
+  
+  function handleLikeEnter(event) {
+    if (event.key === 'Enter') {
+      const liked = event.target.parentElement;
+      if (
+        event.target.classList.contains('fa-regular') && liked
+        && !liked.classList.contains('liked')
+      ) {
         // Première fois qu'on aime
         liked.classList.add('liked');
         totalLikes += 1;
         countLikes.innerText = `${totalLikes}`;
         // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
         const heartIcons = liked.querySelector('.fa-regular.fa-heart');
-        console.log(heartIcons, 'heartIcons');
         heartIcons.classList.remove('fa-regular');
         heartIcons.classList.add('fa-solid');
         const likeCount = liked.querySelector('span');
         likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
         lastLikedElement = liked;
+        event.stopPropagation(); // Empêche la propagation de l'événement
       } else if (lastLikedElement === liked) {
         // Deuxième clic, annuler le like
         liked.classList.remove('liked');
@@ -221,21 +304,22 @@ imagesContainer.addEventListener('keydown', function(event) {
         countLikes.innerText = `${totalLikes}`;
         // Changer la classe de l'icône de cœur de 'fa-solid' à 'fa-regular'
         const heartIcon = liked.querySelector('.fa-solid.fa-heart');
-// console.log(heartIcon, 'heartIcon');
         heartIcon.classList.remove('fa-solid');
         heartIcon.classList.add('fa-regular');
         const likeCount = liked.querySelector('span');
         likeCount.textContent = parseInt(likeCount.textContent, 10) - 1;
         lastLikedElement = null;
+        event.stopPropagation(); // Empêche la propagation de l'événement
       }
-      event.stopPropagation(); // Empêche la propagation de l'événement
     }
   }
+  
   // Ajouter un écouteur d'événements pour les clics
-  document.addEventListener('click', handleLikeEvent);
-
+  document.addEventListener('click', handleLikeClick);
+  
   // Ajouter un écouteur d'événements pour les touches Entrée
-  document.addEventListener('keydown', handleLikeEvent);
+  document.addEventListener('keydown', handleLikeEnter);
+
 }
 
 init();
