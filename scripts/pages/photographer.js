@@ -21,7 +21,7 @@ function headerPhotographer(photographer) {
   img.classList.add('img-rounded');
   photographeHeader.appendChild(img);
 }
-
+console.log(openLightbox)
 const sortImagesSelect = document.getElementById('sort-images-select');
 const sortImagesButton = document.getElementById('sort-images-button');
 const dropdownOptions = sortImagesSelect.querySelectorAll('li');
@@ -80,24 +80,16 @@ async function init() {
   const main = document.getElementById('main');
 
   main.addEventListener('click', (event) => {
-    //  récupèration des coordonnées du click
+
+    const isMediaElement = event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO';
+    const isLikeButton = event.target.classList.contains('fa-heart');
+
+    if (isMediaElement) {
+        // Gérer le clic sur les médias (si nécessaire)
+        //  récupèration des coordonnées du click
     const x = event.clientX;
     const y = event.clientY;
     // console.log(event.target.tagName);
-
-    // click sur le bouton du filtre
-    if (event.target.id === 'sort-images-button') {
-      sortImagesButton.setAttribute('aria-expanded', 'true');
-      sortImagesButton.classList.toggle('active');
-      sortImagesSelect.classList.toggle('active');
-      dropdownOptions[0].focus();
-    }
-
-    // click sur les choix du filtre
-    if (event.target.tagName === 'LI') {
-      // selectedFilter(event.target, photographer.medias);
-    }
-
     if (
       (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO')
       && event.target.parentElement.className !== 'photograph-header'
@@ -111,34 +103,98 @@ async function init() {
       openLightbox(photographerMedias, x, y, mediaIndex);
     }
 
-    // On incrémente une seule fois les compteurs de likes lorsqu'on clique dessus
-    // if (event.target.className === 'fa-regular fa-heart') {
-    //   const liked = event.target.parentElement;
-    //   // console.log(liked);
+    }
+    if (isLikeButton) {
+      // Gérer le clic sur le bouton "like"
+      handleLikeEvent(event);
+  }
+    
+    // click sur le bouton du filtre
+    if (event.target.id === 'sort-images-button') {
+      sortImagesButton.setAttribute('aria-expanded', 'true');
+      sortImagesButton.classList.toggle('active');
+      sortImagesSelect.classList.toggle('active');
+      dropdownOptions[0].focus();
+    }
 
-    //   if (!liked.classList.contains('liked')) {
-    //     liked.classList.add('liked');
-    //     totalLikes += 1;
-    //     countLikes.innerText = `${totalLikes}`;
+    // click sur les choix du filtre
+    if (event.target.tagName === 'LI') {
+      // selectedFilter(event.target, photographer.medias);
+    }
 
-    //     // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
-    //     const heartIcons = liked.querySelector('.fa-regular.fa-heart');
-    //     heartIcons.classList.remove('fa-regular');
-    //     heartIcons.classList.add('fa-solid');
-    //     const likeCount = liked.querySelector('span');
-    //     likeCount.textContent = parseInt(likeCount.textContent, 10) + 1;
-    //   }
-    //   // je vide le coeur et decremente le compte des likes
-    // }
+    
   });
 
+
+  // lancer la lightbox en cliquant sur Entrée
+  const imagesContainer = document.getElementById('photographer-images');
+// console.log(imagesContainer)
+// imagesContainer.addEventListener('keydown', function(event) {
+//   // event.preventDefault();
+//   event.stopPropagation(); // Arrête la propagation de l'événement
+//   // console.log('Keydown event triggered');
+//   // console.log(event)
+//   // console.log(event.target)
+//   if ((event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO') && (event.key === 'Enter')) {
+//     event.preventDefault();
+//     console.log('ddd')
+//     console.log('Keydown event triggered');
+//     console.log('TagName:', event.target.tagName);
+//     console.log('Key:', event.key);
+  
+//     const photographerMedias = photographer.medias;
+//     // console.log(photographerMedias)
+//     const mediaId = event.target.id;
+//     // console.log(mediaId)
+//     const media = photographerMedias.find(media => media.id == mediaId);
+//     // console.log(media)
+//     const mediaIndex = photographerMedias.indexOf(media);
+//     // console.log(mediaIndex)
+//     const x = window.innerWidth / 2;
+//     // console.log(x,"x")
+//     const y = window.innerHeight / 2;
+//     openLightbox(photographerMedias, x, y, mediaIndex);
+//   }
+// })
+
+imagesContainer.addEventListener('keydown', function(event) {
+  console.log('yyyyy')
+  const isMediaElement = event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO';
+
+  if (isMediaElement && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      event.stopPropagation();  
+      // Gérer l'événement pour les médias (ouvrir la lightbox, par exemple)
+      const photographerMedias = photographer.medias;
+      const mediaId = event.target.id;
+      const media = photographerMedias.find(media => media.id == mediaId);
+      const mediaIndex = photographerMedias.indexOf(media);
+      const x = window.innerWidth / 2;
+      const y = window.innerHeight / 2;
+      openLightbox(photographerMedias, x, y, mediaIndex);
+  }
+});
+
+  main.addEventListener('keydown', function(event) {
+    const isLikeButton = event.target.classList.contains('fa-heart');
+
+    if (isLikeButton && (event.key === 'Enter' || event.key === ' ')) {
+      // Gérer l'événement keydown pour les boutons "like"
+      handleLikeEvent(event);
+    }
+  });
+
+
+
+
+  
   let lastLikedElement = null;
 
   // const countLikes = document.getElementById('countLikes');
   // Assurez-vous d'ajuster l'ID en conséquence
 
   function handleLikeEvent(event) {
-    console.log('Type d\'événement :', event.type);
+    // console.log('Type d\'événement :', event.type);
     const liked = event.target.parentElement;
     if (
       (event.target.classList.contains('fa-regular') && liked
@@ -165,7 +221,7 @@ async function init() {
         countLikes.innerText = `${totalLikes}`;
         // Changer la classe de l'icône de cœur de 'fa-solid' à 'fa-regular'
         const heartIcon = liked.querySelector('.fa-solid.fa-heart');
-console.log(heartIcon, 'heartIcon')
+// console.log(heartIcon, 'heartIcon');
         heartIcon.classList.remove('fa-solid');
         heartIcon.classList.add('fa-regular');
         const likeCount = liked.querySelector('span');
