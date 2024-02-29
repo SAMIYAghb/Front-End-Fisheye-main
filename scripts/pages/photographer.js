@@ -138,9 +138,8 @@ async function init() {
   // Assurez-vous d'ajuster l'ID en conséquence
 
   function handleLikeEvent(event) {
+    console.log('Type d\'événement :', event.type);
     const liked = event.target.parentElement;
-    const heartIcon = liked.querySelector('.fa-heart');
-
     if (
       (event.target.classList.contains('fa-regular') && liked
       && !liked.classList.contains('liked'))
@@ -153,6 +152,7 @@ async function init() {
         countLikes.innerText = `${totalLikes}`;
         // Changer la classe de l'icône de cœur de 'fa-regular' à 'fa-solid'
         const heartIcons = liked.querySelector('.fa-regular.fa-heart');
+        console.log(heartIcons, 'heartIcons');
         heartIcons.classList.remove('fa-regular');
         heartIcons.classList.add('fa-solid');
         const likeCount = liked.querySelector('span');
@@ -164,6 +164,8 @@ async function init() {
         totalLikes -= 1;
         countLikes.innerText = `${totalLikes}`;
         // Changer la classe de l'icône de cœur de 'fa-solid' à 'fa-regular'
+        const heartIcon = liked.querySelector('.fa-solid.fa-heart');
+console.log(heartIcon, 'heartIcon')
         heartIcon.classList.remove('fa-solid');
         heartIcon.classList.add('fa-regular');
         const likeCount = liked.querySelector('span');

@@ -1,7 +1,7 @@
 /* eslint no-unused-vars:"off" */
 // Focus sur l'image de fermeture
 const closeButton = document.querySelector('.modal img');
-console.log(closeButton);
+// console.log(closeButton);
 
 function closeModal() {
   const modal = document.getElementById('contact_modal');
@@ -38,20 +38,17 @@ function displayModal(event) {
 //   }
 // });
 
-
-
-
 const focusableElements = 'img, input, textarea, button, [tabindex]:not([tabindex="-1"])';
 const modal = document.querySelector('#contact_modal'); // select the modal by it's id
 
 const firstFocusableElement = modal.querySelector('.modal-form-img');
-console.log(firstFocusableElement);
+// console.log(firstFocusableElement);
 const focusableContent = modal.querySelectorAll(focusableElements);
 
 const lastFocusableElement = focusableContent[focusableContent.length - 1];
 // get last element to be focused inside modal
-document.addEventListener('keydown', function(e) {
-  let isTabPressed = e.key === 'Tab' || e.keyCode === 9;
+document.addEventListener('keydown', (e) => {
+  const isTabPressed = e.key === 'Tab' || e.keyCode === 9;
 
   if (!isTabPressed) {
     return;
@@ -63,8 +60,9 @@ document.addEventListener('keydown', function(e) {
       e.preventDefault();
     }
   } else { // if tab key is pressed
-    if (document.activeElement === lastFocusableElement) { // if focused has reached to last focusable element then focus first focusable element after pressing tab
-      firstFocusableElement.focus(); // add focus for the first focusable element
+    if(document.activeElement === lastFocusableElement) {
+      firstFocusableElement.focus();
+      // ajouter le focus pour le first element
       e.preventDefault();
     }
   }
@@ -73,12 +71,11 @@ document.addEventListener('keydown', function(e) {
 firstFocusableElement.focus();
 
 // Adjouter un event listener pour "keydown" image
-firstFocusableElement.addEventListener('keydown', function(e) {
+firstFocusableElement.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
     closeModal();
   }
 });
-
 
 // const form = document.querySelector('form');
 // function displayErrors(errors) {

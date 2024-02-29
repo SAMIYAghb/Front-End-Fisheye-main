@@ -48,6 +48,7 @@ function mediaFactory(media) {
 
   function getMediaCardDOM() {
     const figure = document.createElement('figure');
+    figure.id = `media-${media.id}`; // Utilisez l'ID du média comme identifiant unique
     // remplacer les espaces par "%20" pour s'assurer que l'URI est correctement formaté.
     const uri = url.replace(' ', '%20');
     // figure.tabIndex = 0;
@@ -68,6 +69,7 @@ function mediaFactory(media) {
     figure.innerHTML += `           
                 <span  aria-label="likes">${likes}</span>           
                 <i role="button" tabindex="0" class="fa-regular fa-heart"></i>
+                
         `;
     return (figure);
   }
