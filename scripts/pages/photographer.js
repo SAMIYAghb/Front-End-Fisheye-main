@@ -3,6 +3,7 @@ import {
   mediaFactory,
 } from '../factories/photographer.js';
 import openLightbox from '../utils/lightbox.js';
+
 // créer le header du photographe
 function headerPhotographer(photographer) {
   const photographeName = document.querySelector('.photograph-name');
@@ -21,10 +22,12 @@ function headerPhotographer(photographer) {
   img.classList.add('img-rounded');
   photographeHeader.appendChild(img);
 }
-// console.log(openLightbox);
-const sortImagesSelect = document.getElementById('sort-images-select');
+// selectionner les element de la selectBox
 const sortImagesButton = document.getElementById('sort-images-button');
+const sortImagesSelect = document.getElementById('sort-images-select');
+console.log(sortImagesSelect);// ul
 const dropdownOptions = sortImagesSelect.querySelectorAll('li');
+console.log(dropdownOptions);
 // const sortDropdown = sortImagesSelect.parentElement;
 
 // Fonction pour afficher la galerie d'images
@@ -39,32 +42,65 @@ function displayMedia(medias) {
   });
 }
 
-// Fonction de sélection du filtre (par click ou par touches)
+// selectBox
+//  sélection le filtre (par click ou par touches)
+function selectedFilter(event, medias) {
+  console.log(event, medias);
+  //  désélectionner tous les éléments de la liste déroulante (dropdownOptions).
+  dropdownOptions.forEach((option) => {
+    option.setAttribute('aria-selected', 'false');
+  });
+  event.setAttribute('aria-selected', 'true');
+  // la valeur associée à cet élément est extraite
+  // via l'attribut data-value et stockée dans la variable selectedOption.
+  const selectedOption = event.getAttribute('data-value');
+  console.log(selectedOption);
+
+  // ferme le menu déroulant
+  sortImagesButton.setAttribute('aria-expanded', 'false');
+  sortImagesButton.removeAttribute('class');
+  sortImagesSelect.removeAttribute('class');
+
+  // Tri les images
+  const sortedMedia = sortMediaBy(selectedOption, medias);
+  // Affiche les images triées
+  displayMedia(sortedMedia);
+}
+// tri des images
+function sortMediaBy(sortBy, media) {
+  console.log(sortBy, media);
+
+  const updateButton = sortBy.replace('likes', 'Popularité').replace('date', 'Date').replace('title', 'Titre');
+  sortImagesButton.innerText = updateButton;
+  const comparator = (a, b) => {
+    if (a[sortBy] > b[sortBy]) return 1;
+    if (a[sortBy] < b[sortBy]) return -1;
+    return 0;
+  };
+
+  return media.sort(updateButton === 'Titre' ? comparator : (a, b) => comparator(b, a));
+}
 
 // Fonction d'initialisation
 async function init() {
   // Récupération de l'ID du photographe
   const params = new URL(document.location).searchParams;
   const photographerId = params.get('id');
-  // console.log('photographerId:', photographerId);
-  // mettre le condition
-  // Vérifier si l'ID existe et est une valeur valide avant la création de la carte du média
-  //  if (!photographerId) {
-  //   // Redirection vers la page d'accueil si l'ID est inexistant ou incorrect
-  //   window.location.href = 'http://127.0.0.1:5500/index.html';
-  //   return null;
-  // }
+  console.log(photographerId);
 
   // Récupération de l'objet photographe correspondant avec ses medias
   const photographers = await getPhotographers();
+
   /* eslint-disable eqeqeq */
   const photographer = photographers.find((item) => item.id == photographerId);
   /* eslint-enable eqeqeq */
   // affichage le header du photographe
   headerPhotographer(photographer);
-  //   const sortedMedias = sortMediaBy('likes',photographer.medias);
+
   // affichage la galerie du photographe
+  // const sortedMedias = sortMediaBy('likes', photographer.medias);
   displayMedia(photographer.medias);
+  // displayMedia(sortedMedias);
 
   // afficher le nombre du like et le tarif
   // Récupération des valeurs pour la bannière des likes
@@ -108,6 +144,8 @@ async function init() {
     }
 
     // click sur le bouton du filtre
+    // Vérifie si l'élément déclencheur de l'événement
+    // (event.target)a un attribut id='sort-images-button'
     if (event.target.id === 'sort-images-button') {
       sortImagesButton.setAttribute('aria-expanded', 'true');
       sortImagesButton.classList.toggle('active');
@@ -117,13 +155,12 @@ async function init() {
 
     // click sur les choix du filtre
     if (event.target.tagName === 'LI') {
-      // selectedFilter(event.target, photographer.medias);
+      selectedFilter(event.target, photographer.medias);
     }
   });
 
   // lancer la lightbox en cliquant sur Entrée
   const imagesContainer = document.getElementById('photographer-images');
-
   imagesContainer.addEventListener('keydown', (event) => {
     // console.log('yyyyy');
     const isMediaElement = event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO';
@@ -178,7 +215,6 @@ async function init() {
       event.stopPropagation(); // Empêche la propagation de l'événement
     }
   }
-
   function handleLikeEnter(event) {
     if (event.key === 'Enter') {
       const liked = event.target.parentElement;
@@ -214,12 +250,14 @@ async function init() {
       }
     }
   }
-
   // Ajouter un écouteur d'événements pour les clics
   document.addEventListener('click', handleLikeClick);
-
   // Ajouter un écouteur d'événements pour les touches Entrée
   document.addEventListener('keydown', handleLikeEnter);
+
+  // Définir le filtre initial sur "Popularité" et afficher les médias triés
+  const initialFilterOption = sortImagesSelect.querySelector('[data-value="likes"]');
+  selectedFilter(initialFilterOption, photographer.medias);
 }
 
 init();
