@@ -25,3 +25,11 @@ async function init() {
 }
 
 init();
+
+//code a mettre dans photographer js
+// Vérifier si l'ID est valide
+// if (!photographerId || !isValidPhotographerId(photographerId, photographers)) {
+//   // Redirection vers la page d'accueil si l'ID est inexistant ou incorrect
+//   window.location.href = 'http://127.0.0.1:5500/index.html';
+//   return null;
+// }
