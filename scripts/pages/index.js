@@ -13,9 +13,9 @@ function displayData(photographers) {
 }
 
 // Fonction pour vérifier si l'ID du photographe est valide
-function isValidPhotographerId(photographerId, photographers) {
-  return photographers.some((photographer) => photographer.id == photographerId);
-}
+// function isValidPhotographerId(photographerId, photographers) {
+//   return photographers.some((photographer) => photographer.id === photographerId);
+// }
 // Initialisation
 async function init() {
   // On attend la récupération des données
@@ -26,7 +26,7 @@ async function init() {
 
 init();
 
-//code a mettre dans photographer js
+// code a mettre dans photographer js
 // Vérifier si l'ID est valide
 // if (!photographerId || !isValidPhotographerId(photographerId, photographers)) {
 //   // Redirection vers la page d'accueil si l'ID est inexistant ou incorrect

@@ -2,7 +2,17 @@
 // Focus sur l'image de fermeture
 const closeButton = document.querySelector('.modal img');
 // console.log(closeButton);
+function resetForm() {
+  // Clear the form fields
+  document.getElementById('prenom').value = '';
+  document.getElementById('nom').value = '';
+  document.getElementById('email').value = '';
+  document.getElementById('message').value = '';
 
+  // Clear error messages
+  const errorMessagesContainer = document.getElementById('error-messages');
+  errorMessagesContainer.innerHTML = '';
+}
 function closeModal() {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'none';
@@ -67,40 +77,11 @@ firstFocusableElement.addEventListener('keydown', (e) => {
   }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 const form = document.querySelector('form');
-// function displayErrors(errors) {
-//   const errorMessagesContainer = document.getElementById('error-messages');
-//   errorMessagesContainer.innerHTML = ''; // Clear previous error messages
 
-//   // Display each error message in the appropriate element
-//   Object.keys(errors).forEach((field) => {
-//     const errorMessage = errors[field];
-//     const errorElement = document.createElement('p');
-//     errorElement.textContent = errorMessage;
-//     errorMessagesContainer.appendChild(errorElement);
-//   });
-// }
 function displayErrors(errors) {
   // Clear previous error messages
   const errorMessagesContainer = document.getElementById('error-messages');
-  console.log(errorMessagesContainer);
   errorMessagesContainer.innerHTML = '';
 
   // Display each error message under the corresponding input field
@@ -118,8 +99,6 @@ function displayErrors(errors) {
     }
   });
 }
-
-
 // Fonction utilitaire pour valider l'adresse email
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -157,18 +136,6 @@ function validateForm() {
   return errors;
 }
 
-function resetForm() {
-  // Clear the form fields
-  document.getElementById('prenom').value = '';
-  document.getElementById('nom').value = '';
-  document.getElementById('email').value = '';
-  document.getElementById('message').value = '';
-
-  // Clear error messages
-  const errorMessagesContainer = document.getElementById('error-messages');
-  errorMessagesContainer.innerHTML = '';
-}
-
 function sendForm(event) {
   // Empêche la soumission du formulaire
   event.preventDefault();
@@ -192,29 +159,10 @@ function sendForm(event) {
     resetForm();
   } else {
     // Il y a des erreurs, afficher les messages d'erreur
-    console.log('Errors:', errors);
+    // console.log('Errors:', errors);
     displayErrors(errors);
   }
 }
 
 // Add event listener to the form
 form.addEventListener('submit', sendForm);
-
-// function displayErrors(errors) {
-//   // Clear previous error messages
-//   const errorMessagesContainer = document.getElementById('error-messages');
-//   errorMessagesContainer.innerHTML = '';
-
-//   // Display each error message under the corresponding input field
-//   Object.keys(errors).forEach((field) => {
-//     const errorMessage = errors[field];
-//     const errorElement = document.createElement('p');
-//     errorElement.textContent = errorMessage;
-
-//     // Find the input field corresponding to the error and append the error message
-//     const inputField = document.getElementById(field);
-//     if (inputField) {
-//       inputField.parentNode.appendChild(errorElement);
-//     }
-//   });
-// }

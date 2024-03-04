@@ -25,9 +25,9 @@ function headerPhotographer(photographer) {
 // selectionner les element de la selectBox
 const sortImagesButton = document.getElementById('sort-images-button');
 const sortImagesSelect = document.getElementById('sort-images-select');
-console.log(sortImagesSelect);// ul
+// console.log(sortImagesSelect);// ul
 const dropdownOptions = sortImagesSelect.querySelectorAll('li');
-console.log(dropdownOptions);
+// console.log(dropdownOptions);
 // const sortDropdown = sortImagesSelect.parentElement;
 
 // Fonction pour afficher la galerie d'images
@@ -45,7 +45,7 @@ function displayMedia(medias) {
 // selectBox
 //  sélection le filtre (par click ou par touches)
 function selectedFilter(event, medias) {
-  console.log(event, medias);
+  // console.log(event, medias);
   //  désélectionner tous les éléments de la liste déroulante (dropdownOptions).
   dropdownOptions.forEach((option) => {
     option.setAttribute('aria-selected', 'false');
@@ -54,31 +54,30 @@ function selectedFilter(event, medias) {
   // la valeur associée à cet élément est extraite
   // via l'attribut data-value et stockée dans la variable selectedOption.
   const selectedOption = event.getAttribute('data-value');
-  console.log(selectedOption);
+  // console.log(selectedOption);
 
   // ferme le menu déroulant
   sortImagesButton.setAttribute('aria-expanded', 'false');
   sortImagesButton.removeAttribute('class');
   sortImagesSelect.removeAttribute('class');
+  // tri des images
+  function sortMediaBy(sortBy, media) {
+    // console.log(sortBy, media);
 
+    const updateButton = sortBy.replace('likes', 'Popularité').replace('date', 'Date').replace('title', 'Titre');
+    sortImagesButton.innerText = updateButton;
+    const comparator = (a, b) => {
+      if (a[sortBy] > b[sortBy]) return 1;
+      if (a[sortBy] < b[sortBy]) return -1;
+      return 0;
+    };
+
+    return media.sort(updateButton === 'Titre' ? comparator : (a, b) => comparator(b, a));
+  }
   // Tri les images
   const sortedMedia = sortMediaBy(selectedOption, medias);
   // Affiche les images triées
   displayMedia(sortedMedia);
-}
-// tri des images
-function sortMediaBy(sortBy, media) {
-  console.log(sortBy, media);
-
-  const updateButton = sortBy.replace('likes', 'Popularité').replace('date', 'Date').replace('title', 'Titre');
-  sortImagesButton.innerText = updateButton;
-  const comparator = (a, b) => {
-    if (a[sortBy] > b[sortBy]) return 1;
-    if (a[sortBy] < b[sortBy]) return -1;
-    return 0;
-  };
-
-  return media.sort(updateButton === 'Titre' ? comparator : (a, b) => comparator(b, a));
 }
 
 // Fonction d'initialisation
@@ -86,7 +85,7 @@ async function init() {
   // Récupération de l'ID du photographe
   const params = new URL(document.location).searchParams;
   const photographerId = params.get('id');
-  console.log(photographerId);
+  // console.log(photographerId);
 
   // Récupération de l'objet photographe correspondant avec ses medias
   const photographers = await getPhotographers();
@@ -117,7 +116,6 @@ async function init() {
 
   main.addEventListener('click', (event) => {
     const isMediaElement = event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO';
-    const isLikeButton = event.target.classList.contains('fa-heart');
 
     if (isMediaElement) {
       // Gérer le clic sur les médias (si nécessaire)
@@ -137,10 +135,6 @@ async function init() {
         const mediaIndex = photographerMedias.indexOf(media);
         openLightbox(photographerMedias, x, y, mediaIndex);
       }
-    }
-    if (isLikeButton) {
-      // Gérer le clic sur le bouton "like"
-      handleLikeEvent(event);
     }
 
     // click sur le bouton du filtre
