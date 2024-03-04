@@ -8,6 +8,12 @@ function closeModal() {
   modal.style.display = 'none';
   // Mettre le focus sur l'élément image après la fermeture de la modale
   // closeButton.focus();
+  // Nettoyer les messages d'erreur
+  const errorContainers = document.querySelectorAll('[id^="error-messages-"]');
+  errorContainers.forEach((container) => {
+    container.innerHTML = '';
+  });
+  resetForm();
 }
 
 function displayModal(event) {
@@ -79,19 +85,46 @@ firstFocusableElement.addEventListener('keydown', (e) => {
 
 
 const form = document.querySelector('form');
-function displayErrors(errors) {
-  const errorMessagesContainer = document.getElementById('error-messages');
-  errorMessagesContainer.innerHTML = ''; // Clear previous error messages
+// function displayErrors(errors) {
+//   const errorMessagesContainer = document.getElementById('error-messages');
+//   errorMessagesContainer.innerHTML = ''; // Clear previous error messages
 
-  // Display each error message in the appropriate element
+//   // Display each error message in the appropriate element
+//   Object.keys(errors).forEach((field) => {
+//     const errorMessage = errors[field];
+//     const errorElement = document.createElement('p');
+//     errorElement.textContent = errorMessage;
+//     errorMessagesContainer.appendChild(errorElement);
+//   });
+// }
+function displayErrors(errors) {
+  // Clear previous error messages
+  const errorMessagesContainer = document.getElementById('error-messages');
+  console.log(errorMessagesContainer);
+  errorMessagesContainer.innerHTML = '';
+
+  // Display each error message under the corresponding input field
   Object.keys(errors).forEach((field) => {
     const errorMessage = errors[field];
     const errorElement = document.createElement('p');
     errorElement.textContent = errorMessage;
-    errorMessagesContainer.appendChild(errorElement);
+    errorElement.className = 'error-message'; // Ajout d'une classe pour le style (facultatif)
+
+    // Ajout de l'erreur dans le div dédié au champ d'entrée correspondant
+    const errorContainer = document.getElementById(`error-messages-${field}`);
+    if (errorContainer) {
+      errorContainer.innerHTML = ''; // Nettoie les messages d'erreur précédents
+      errorContainer.appendChild(errorElement);
+    }
   });
 }
 
+
+// Fonction utilitaire pour valider l'adresse email
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 function validateForm() {
   const errors = {};
 
@@ -122,11 +155,6 @@ function validateForm() {
   });
 
   return errors;
-}
-// Fonction utilitaire pour valider l'adresse email
-function isValidEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
 }
 
 function resetForm() {
@@ -171,10 +199,6 @@ function sendForm(event) {
 
 // Add event listener to the form
 form.addEventListener('submit', sendForm);
-
-
-
-
 
 // function displayErrors(errors) {
 //   // Clear previous error messages
