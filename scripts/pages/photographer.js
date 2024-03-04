@@ -43,6 +43,20 @@ function displayMedia(medias) {
 }
 
 // selectBox
+// tri des images
+function sortMediaBy(sortBy, media) {
+  // console.log(sortBy, media);
+
+  const updateButton = sortBy.replace('likes', 'Popularité').replace('date', 'Date').replace('title', 'Titre');
+  sortImagesButton.innerText = updateButton;
+  const comparator = (a, b) => {
+    if (a[sortBy] > b[sortBy]) return 1;
+    if (a[sortBy] < b[sortBy]) return -1;
+    return 0;
+  };
+
+  return media.sort(updateButton === 'Titre' ? comparator : (a, b) => comparator(b, a));
+}
 //  sélection le filtre (par click ou par touches)
 function selectedFilter(event, medias) {
   // console.log(event, medias);
@@ -60,25 +74,12 @@ function selectedFilter(event, medias) {
   sortImagesButton.setAttribute('aria-expanded', 'false');
   sortImagesButton.removeAttribute('class');
   sortImagesSelect.removeAttribute('class');
-  // tri des images
-  function sortMediaBy(sortBy, media) {
-    // console.log(sortBy, media);
-
-    const updateButton = sortBy.replace('likes', 'Popularité').replace('date', 'Date').replace('title', 'Titre');
-    sortImagesButton.innerText = updateButton;
-    const comparator = (a, b) => {
-      if (a[sortBy] > b[sortBy]) return 1;
-      if (a[sortBy] < b[sortBy]) return -1;
-      return 0;
-    };
-
-    return media.sort(updateButton === 'Titre' ? comparator : (a, b) => comparator(b, a));
-  }
   // Tri les images
   const sortedMedia = sortMediaBy(selectedOption, medias);
   // Affiche les images triées
   displayMedia(sortedMedia);
 }
+
 
 // Fonction d'initialisation
 async function init() {
@@ -150,6 +151,10 @@ async function init() {
     // click sur les choix du filtre
     if (event.target.tagName === 'LI') {
       selectedFilter(event.target, photographer.medias);
+      // if (event.key === 'Enter') {
+      //   event.preventDefault();
+      //   selectedFilter(event.target, photographer.medias);
+      // }
     }
   });
 
@@ -249,6 +254,14 @@ async function init() {
   // Ajouter un écouteur d'événements pour les touches Entrée
   document.addEventListener('keydown', handleLikeEnter);
 
+  // Ajouter un écouteur d'événements à la liste déroulante
+  sortImagesSelect.addEventListener('keydown', (event) => {
+  // Si la touche est "Entrée" ou "Espace", et que l'élément actif est une option
+    if ((event.key === 'Enter' || event.key === ' ') && event.target.tagName === 'LI') {
+      event.preventDefault(); // Empêcher le comportement par défaut de la touche "Espace"
+      selectedFilter(event.target, photographer.medias);
+    }
+  });
   // Définir le filtre initial sur "Popularité" et afficher les médias triés
   const initialFilterOption = sortImagesSelect.querySelector('[data-value="likes"]');
   selectedFilter(initialFilterOption, photographer.medias);
