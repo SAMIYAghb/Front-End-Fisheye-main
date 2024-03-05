@@ -10,7 +10,7 @@
   </head>
   <body>
     <header>
-      <a href="index.html">
+      <a href="index.html" area-label="Fisheye Home page" >
       <img src="assets/images/logo.png" class="logo"
       alt="Fisheye Home page" 
        />
@@ -32,7 +32,7 @@
       <label for="sort-images-select" aria-label="Order by">Trier par</label>
       <div class="dropdown-menu">
         <button id="sort-images-button" aria-haspopup="listbox" aria-expanded="false"
-          aria-labelledby="sort-images-select">
+          >
           Popularité
         </button>
         <ul id="sort-images-select" role="listbox" aria-activedescendant="option1" aria-labelledby="sort-images-select">
@@ -84,7 +84,7 @@
 						<label id="prenom_label" for="prenom">Prénom</label>
 						<input
             tabindex="0"
-            aria-labelledby="prenom_label"
+            
             aria-label="First name" 
              type="text" id="prenom"/>
              <div id="error-messages-prenom" role="alert" aria-live="assertive"></div>
@@ -93,7 +93,7 @@
 						<label id="nom_label" for="nom">Nom</label>
 						<input
             tabindex="0"
-            aria-labelledby="nom_label"
+            
             aria-label="Last name" 
              type="text" id="nom"/>
              <div id="error-messages-nom" role="alert" aria-live="assertive"></div>
@@ -102,7 +102,7 @@
 						<label id="email_label" for="email">Email</label>
 						<input
             tabindex="0"
-            aria-labelledby="email_label"
+            
             aria-label="Email" 
              type="text" id="email"/>
              <div id="error-messages-email" role="alert" aria-live="assertive"></div>
@@ -113,14 +113,14 @@
             tabindex="0"
             aria-label="Your message"
              type="text" id="message"
-             rows="5" required minlength="10" aria-labelledby="message_label">
+             rows="5" aria-labelledby="message_label">
              </textarea>
              <div id="error-messages-message" role="alert" aria-live="assertive"></div>
 					</div>
           <div id="error-messages" role="alert" aria-live="assertive"></div>
           <button 
           tabindex="0"
-          aria-labelledby="envoyer_label"
+          
           aria-label="Send" class="contact_button_send">Envoyer</button>
 				</form>
 			</div>
