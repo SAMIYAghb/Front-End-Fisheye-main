@@ -50,26 +50,26 @@
 
     </main>
 
-    <section class="lightbox">
-      <div class="border-lightbox" role="dialog" aria-modal="true">
+    <section class="lightbox" role="dialog" aria-hidden="true">
+      <div class="border-lightbox">
         <span tabindex="0"
-        class="close" aria-label="Fermer la lightbox">&times;</span>
-        <a tabindex="0" class="prev" aria-label="Image précédente">&#10094;</a>
+        class="close" aria-label="Fermer la lightbox"  role="button">&times;</span>
+        <a tabindex="0" class="prev" aria-label="Image précédente" role="button">&#10094;</a>
         <figure class="lightbox-img-container">
           <img tabindex="0"
           class="lightbox-img" alt="image" src="assets/images/logo.png">
           <figcaption tabindex="0" class="lightbox-caption"></figcaption>
         </figure>
         <a tabindex="0"
-        class="next" aria-label="Image suivante">&#10095;</a>
+        class="next" aria-label="Image suivante" role="button">&#10095;</a>
       </div>
     </section>
 
-    <div id="contact_modal" role="dialog" aria-modal="true">
+    <div id="contact_modal" role="dialog" aria-hidden="true" aria-describedby="contact-modal">
 			<div class="modal">
 				<header>
           <div class="form-details">
-          <h2>Contactez-moi</h2>
+          <h2 id="contact-modal">Contactez-moi</h2>
           <p class="photographer-name"></p>
         </div>
           <img src="assets/icons/close.svg"
