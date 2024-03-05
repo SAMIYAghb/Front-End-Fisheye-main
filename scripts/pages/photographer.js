@@ -182,7 +182,7 @@ async function init() {
   let lastLikedElement = null;
   function handleLikeClick(event) {
     const liked = event.target.parentElement;
-    console.log(liked);
+    // console.log(liked);
     if (
       event.target.classList.contains('fa-regular') && liked
       && !liked.classList.contains('liked')
