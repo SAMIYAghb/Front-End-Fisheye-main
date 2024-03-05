@@ -69,7 +69,7 @@ function mediaFactory(media) {
     figure.innerHTML += `           
                 <span>${likes}</span>   
 
-                <i tabindex="0" class="fa-regular fa-heart" aria-label="likes" role="button" ></i>
+                <i tabindex="0" class="fa-regular fa-heart" aria-label="likes" role="button"  aria-hidden="true"></i>
                 
         `;
     return (figure);
