@@ -67,10 +67,10 @@ function mediaFactory(media) {
     }
     // quel que soit le type de média, un bloc commun est ajouté à l'élément <figure> :
     figure.innerHTML += `           
-                <span>${likes}</span>   
+                <span tabindex="0">${likes}</span>   
 
-                <i tabindex="0" class="fa-regular fa-heart" aria-label="likes" role="button"  aria-hidden="true"></i>
-                
+                <i tabindex="0" class="fa-regular fa-heart" aria-label="likes" role="button" title="likes"></i>
+                <span class="screenreader-text"></span>
         `;
     return (figure);
   }

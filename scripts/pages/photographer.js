@@ -80,7 +80,6 @@ function selectedFilter(event, medias) {
   displayMedia(sortedMedia);
 }
 
-
 // Fonction d'initialisation
 async function init() {
   // Récupération de l'ID du photographe

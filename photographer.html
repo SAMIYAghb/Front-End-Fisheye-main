@@ -28,14 +28,16 @@
         class="contact_button" onclick="displayModal(event)
         ">Contactez-moi</button>
       </div>
-<div class="dropdown">
+<div class="dropdown" role="combobox" aria-haspopup="listbox" aria-expanded="false">
       <label for="sort-images-select" aria-label="Order by">Trier par</label>
       <div class="dropdown-menu">
         <button id="sort-images-button" aria-haspopup="listbox" aria-expanded="false"
+        aria-controls="sort-images-select"    
           >
           Popularité
         </button>
-        <ul id="sort-images-select" role="listbox" aria-activedescendant="option1" aria-labelledby="sort-images-select">
+        <ul id="sort-images-select" role="listbox" aria-activedescendant="option1" aria-labelledby="sort-images-select"
+        >
           <li id="option1" role="option" tabindex="0" data-value="likes" aria-selected="true">Popularité</li>
           <li id="option2" role="option" tabindex="0" data-value="date" aria-selected="false">Date</li>
           <li id="option3" role="option" tabindex="0" data-value="title" aria-selected="false">Titre</li>
