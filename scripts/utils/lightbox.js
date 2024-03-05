@@ -44,7 +44,7 @@ function openLightbox(medias, x, y, currentIndex) {
   lightbox.style.left = `${x}px`;
   lightbox.style.transform = `translate(-${x}px, -${y}px) scale(1)`;
   lightbox.style.transition = 'transform 0.5s ease-in';
-
+  lightbox.setAttribute('aria-hidden', 'false'); // La lightbox est visible
   // Temporisation pour afficher l'image de fond semi-transparent,
   // le temps que la lightbox soit de taille 1
   setTimeout(() => {
@@ -81,6 +81,7 @@ function openLightbox(medias, x, y, currentIndex) {
       lightbox.style.backgroundColor = 'rgba(0, 0, 0, 0)';
       borderLightbox.style.backgroundColor = 'rgba(255, 255, 255, 0)';
       borderLightbox.style.transition = 'background-color 0.2s ease-out';
+      lightbox.setAttribute('aria-hidden', 'true'); // La lightbox est cachée
     }
   });
 

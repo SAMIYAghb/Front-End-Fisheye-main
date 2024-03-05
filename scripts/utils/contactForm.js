@@ -16,6 +16,7 @@ function resetForm() {
 function closeModal() {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'none';
+  modal.setAttribute('aria-hidden', 'true');
   // Mettre le focus sur l'élément image après la fermeture de la modale
   // closeButton.focus();
   // Nettoyer les messages d'erreur
@@ -29,10 +30,11 @@ function closeModal() {
 function displayModal(event) {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'flex';
+  modal.setAttribute('aria-hidden', 'false');
   const photographerName = document.querySelector('.photograph-name');
   const photographerContact = document.querySelector('.modal p');
   photographerContact.innerText = `${photographerName.innerText}`;
-  closeButton.focus();
+  document.getElementById('prenom').focus();
 }
 
 const focusableElements = 'img, input, textarea, button, [tabindex]:not([tabindex="-1"])';
