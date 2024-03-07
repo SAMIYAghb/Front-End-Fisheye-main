@@ -13,7 +13,7 @@ function displayData(photographers) {
 }
 
 // Fonction pour vérifier si l'ID du photographe est valide
-// function isValidPhotographerId(photographerId, photographers) {
+// export default function isValidPhotographerId(photographerId, photographers) {
 //   return photographers.some((photographer) => photographer.id === photographerId);
 // }
 // Initialisation

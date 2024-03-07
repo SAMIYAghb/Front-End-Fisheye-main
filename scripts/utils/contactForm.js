@@ -114,7 +114,6 @@ function validateForm() {
   || document.getElementById('error-messages-nom').innerText
       || document.getElementById('error-messages-email').innerText
       || document.getElementById('error-messages-message').innerText) {
-    document.getElementById('error-messages').innerText = 'Veuillez corriger les erreurs dans le formulaire.';
     return false; // Empêcher l'envoi du formulaire en cas d'erreur
   }
 

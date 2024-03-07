@@ -224,7 +224,10 @@ main figcaption {
   margin: 0;
   cursor: pointer;
 }
-
+.close:focus-visible{
+  /* position: absolute;
+ height: 50px; */
+}
 .prev,
 .next {
   font-size: 60px;

@@ -56,12 +56,12 @@ function mediaFactory(media) {
     // est construit différemment :
     if (type === 'image') {
       figure.innerHTML = `
-            <img src="${uri}" alt="${title}" title="${title}" id="${id}" tabindex="0">
+            <img src="${uri}" alt="${title}" title="${title}" id="${id}" tabindex="0" aria-label="${title}">
             <figcaption>${title}</figcaption>
         `;
     } else {
       figure.innerHTML = `
-            <video src="${uri}" type="video/mp4" alt="${title}" title="${title}" id="${id}" tabindex="0"></video>
+            <video src="${uri}" type="video/mp4" alt="${title}" title="${title}" id="${id}" tabindex="0" aria-label="${title}"></video>
             <figcaption class="video-caption">${title}</figcaption>
         `;
     }
