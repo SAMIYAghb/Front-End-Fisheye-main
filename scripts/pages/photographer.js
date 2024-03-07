@@ -1,8 +1,8 @@
-import getPhotographers from '../utils/getPhotographers.js';
+import getPhotographers from '../models/getPhotographers.js';
 import {
   mediaFactory,
 } from '../factories/photographer.js';
-import openLightbox from '../utils/lightbox.js';
+import openLightbox from '../models/lightbox.js';
 
 // créer le header du photographe
 function headerPhotographer(photographer) {

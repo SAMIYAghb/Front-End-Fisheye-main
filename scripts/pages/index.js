@@ -1,4 +1,4 @@
-import getPhotographers from '../utils/getPhotographers.js';
+import getPhotographers from '../models/getPhotographers.js';
 import { photographerFactory } from '../factories/photographer.js';
 
 // Affiche les données des photographes
