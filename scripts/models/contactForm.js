@@ -78,7 +78,11 @@ firstFocusableElement.addEventListener('keydown', (e) => {
     closeModal();
   }
 });
-
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
+});
 const form = document.querySelector('form');
 function validateForm() {
   // Récupérer les valeurs des champs
