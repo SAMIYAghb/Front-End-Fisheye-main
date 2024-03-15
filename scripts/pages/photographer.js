@@ -84,15 +84,18 @@ function selectedFilter(event, medias) {
 async function init() {
   // Récupération de l'ID du photographe
   const params = new URL(document.location).searchParams;
-  const photographerId = params.get('id');
-  // console.log(photographerId);
+  const photographerId = parseInt(params.get('id'), 10);
+  console.log(photographerId);
+
+  if (Number.isNaN(photographerId)) {
+    window.location.href = 'index.html';
+  }
 
   // Récupération de l'objet photographe correspondant avec ses medias
   const photographers = await getPhotographers();
 
-  /* eslint-disable eqeqeq */
-  const photographer = photographers.find((item) => item.id == photographerId);
-  /* eslint-enable eqeqeq */
+  const photographer = photographers.find((item) => item.id === photographerId);
+
   // affichage le header du photographe
   headerPhotographer(photographer);
 

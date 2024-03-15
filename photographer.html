@@ -16,7 +16,7 @@
        />
       </a>
     </header>
-    <main id="main">
+    <main id="main" aria-hidden="false" >
       <div class="photograph-header">
         <div class="photograph-header__bloc-titre">
           <h1 class="photograph-name"></h1>
@@ -28,22 +28,22 @@
         class="contact_button" onclick="displayModal(event)
         ">Contactez-moi</button>
       </div>
-<div class="dropdown" role="combobox" aria-haspopup="listbox" aria-expanded="false">
-      <label for="sort-images-select" aria-label="Order by">Trier par</label>
-      <div class="dropdown-menu">
-        <button id="sort-images-button" aria-haspopup="listbox" aria-expanded="false"
-        aria-controls="sort-images-select"    
-          >
-          Popularité
-        </button>
-        <ul id="sort-images-select" role="listbox" aria-activedescendant="option1" aria-labelledby="sort-images-select" 
-        >
-          <li id="option1" role="option" tabindex="0" data-value="likes" aria-selected="true">Popularité</li>
-          <li id="option2" role="option" tabindex="0" data-value="date" aria-selected="false">Date</li>
-          <li id="option3" role="option" tabindex="0" data-value="title" aria-selected="false">Titre</li>
-        </ul>
-      </div> 
-</div>
+    <div class="dropdown" role="combobox" aria-haspopup="listbox" aria-expanded="false">
+          <label for="sort-images-select" aria-label="Order by">Trier par</label>
+          <div class="dropdown-menu">
+            <button id="sort-images-button" aria-haspopup="listbox" aria-expanded="false"
+            aria-controls="sort-images-select"    
+              >
+              Popularité
+            </button>
+            <ul id="sort-images-select" role="listbox" aria-activedescendant="option1" aria-labelledby="sort-images-select" 
+            >
+              <li id="option1" role="option" tabindex="0" data-value="likes" aria-selected="true">Popularité</li>
+              <li id="option2" role="option" tabindex="0" data-value="date" aria-selected="false">Date</li>
+              <li id="option3" role="option" tabindex="0" data-value="title" aria-selected="false">Titre</li>
+            </ul>
+          </div> 
+    </div>
       <div id="photographer-images"></div>
       <div class="likes-banner">
         <span class="count-likes"></span>
@@ -52,7 +52,7 @@
 
     </main>
 
-    <section class="lightbox" role="dialog" aria-hidden="true">
+    <section class="lightbox" role="dialog" aria-hidden="true" aria-label="carroussel des media">
       <div class="border-lightbox">
         <span tabindex="0"
         class="close" aria-label="Fermer la lightbox"  role="button">&times;</span>
@@ -67,7 +67,7 @@
       </div>
     </section>
 
-    <div id="contact_modal" role="dialog" aria-hidden="true" aria-describedby="contact-modal">
+    <div id="contact_modal" role="dialog" aria-hidden="true" aria-label="formulaire de contacte">
 			<div class="modal">
 				<header>
           <div class="form-details">
