@@ -91,8 +91,15 @@ async function init() {
     window.location.href = 'index.html';
   }
 
-  // Récupération de l'objet photographe correspondant avec ses medias
   const photographers = await getPhotographers();
+  const photographerReq = photographers.find((photographer)=> photographer.id === photographerId);
+
+  if (!photographerReq) {
+    window.location.href = 'index.html';
+  }
+
+  // Récupération de l'objet photographe correspondant avec ses medias
+  // const photographers = await getPhotographers();
 
   const photographer = photographers.find((item) => item.id === photographerId);
 
