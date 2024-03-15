@@ -95,12 +95,16 @@ function validateForm() {
   document.getElementById('error-messages').innerText = '';
 
   // Valider le prénom
-  if (prenom.length < 2 || prenom.length > 50) {
+  if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(prenom)) {
+    document.getElementById('error-messages-prenom').innerText = 'Le prénom ne peut contenir que des lettres.';
+  } else if (prenom.length < 2 || prenom.length > 50) {
     document.getElementById('error-messages-prenom').innerText = 'Le prénom doit avoir entre 2 et 50 caractères.';
   }
 
   // Valider le nom
-  if (nom.length < 1 || nom.length > 50) {
+  if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(nom)) {
+    document.getElementById('error-messages-nom').innerText = 'Le nom ne peut contenir que des lettres.';
+  } else if (nom.length < 1 || nom.length > 50) {
     document.getElementById('error-messages-nom').innerText = 'Le nom doit avoir entre 1 et 50 caractères.';
   }
 
