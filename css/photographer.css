@@ -435,3 +435,7 @@ form input, textarea {
   font-size: 12px; 
   margin-top: 5px;
 }
+
+.no-scroll {
+  overflow: hidden;
+}

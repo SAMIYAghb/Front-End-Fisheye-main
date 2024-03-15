@@ -8,9 +8,12 @@ function resetForm() {
   document.getElementById('message').value = '';
 }
 function closeModal() {
+  document.body.classList.remove('no-scroll'); // Supprimer la classe pour activer le défilement du corps
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'none';
   modal.setAttribute('aria-hidden', 'true');
+  const main = document.getElementById('main');
+  main.setAttribute('aria-hidden', 'false');
   // Mettre le focus sur l'élément image après la fermeture de la modale
   // closeButton.focus();
   // Nettoyer les messages d'erreur
@@ -25,10 +28,13 @@ function displayModal(event) {
   const modal = document.getElementById('contact_modal');
   modal.style.display = 'flex';
   modal.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('no-scroll'); // Ajouter une classe pour désactiver le défilement du corps
   const photographerName = document.querySelector('.photograph-name');
   const photographerContact = document.querySelector('.modal p');
   photographerContact.innerText = `${photographerName.innerText}`;
   document.getElementById('prenom').focus();
+  const main = document.getElementById('main');
+  main.setAttribute('aria-hidden', 'true');
 }
 
 const focusableElements = 'img, input, textarea, button, [tabindex]:not([tabindex="-1"])';

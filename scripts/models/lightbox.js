@@ -1,5 +1,8 @@
 // Ouverture de la lightbox
 function openLightbox(medias, x, y, currentIndex) {
+  const main = document.getElementById('main');
+  main.setAttribute('aria-hidden', 'true');
+  document.body.classList.add('no-scroll'); // Ajouter une classe pour désactiver le défilement du corps
   // l'affiche de l'a bonne 'imagequi correspond  à l'index dans le tableau des medias
   if (!medias || medias.length === 0 || currentIndex < 0 || currentIndex >= medias.length) {
     return;
@@ -75,6 +78,7 @@ function openLightbox(medias, x, y, currentIndex) {
 
     // Si click sur la croix, on ferme la lightbox avec l'animation inverse de l'ouverture
     if (event.target.className === 'close') {
+      document.body.classList.remove('no-scroll'); // Supprimer la classe pour activer le défilement du corps
       document.body.style.overflow = 'auto';
       lightbox.style.transform = 'translate(-50%, -50%) scale(0)';
       lightbox.style.transition = 'transform 0.5s ease-in';
@@ -82,6 +86,7 @@ function openLightbox(medias, x, y, currentIndex) {
       borderLightbox.style.backgroundColor = 'rgba(255, 255, 255, 0)';
       borderLightbox.style.transition = 'background-color 0.2s ease-out';
       lightbox.setAttribute('aria-hidden', 'true'); // La lightbox est cachée
+      main.setAttribute('aria-hidden', 'false');
     }
   });
 
