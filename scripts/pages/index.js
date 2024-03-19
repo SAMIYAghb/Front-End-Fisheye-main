@@ -1,13 +1,15 @@
 import getPhotographers from '../models/getPhotographers.js';
-import { photographerFactory } from '../factories/photographer.js';
+import PhotographerFactory from '../models/Photographer.js';
 
 // Affiche les données des photographes
 function displayData(photographers) {
   const photographersSection = document.querySelector('.photographer_section');
 
-  photographers.forEach((photographer) => {
-    const photographerModel = photographerFactory(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
+  photographers.forEach((photographerData) => {
+    const photographer = PhotographerFactory.createPhotographer(photographerData);
+    // console.log(photographer)
+
+    const userCardDOM = photographer.getUserCardDOM();
     photographersSection.appendChild(userCardDOM);
   });
 }

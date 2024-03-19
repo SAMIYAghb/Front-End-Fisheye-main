@@ -35,6 +35,7 @@ function displayModal(event) {
   document.getElementById('prenom').focus();
   const main = document.getElementById('main');
   main.setAttribute('aria-hidden', 'true');
+  document.body.classList.add('no-scroll');
 }
 
 const focusableElements = 'img, input, textarea, button, [tabindex]:not([tabindex="-1"])';
@@ -78,11 +79,7 @@ firstFocusableElement.addEventListener('keydown', (e) => {
     closeModal();
   }
 });
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeModal();
-  }
-});
+
 const form = document.querySelector('form');
 function validateForm() {
   // Récupérer les valeurs des champs
@@ -150,3 +147,8 @@ function sendForm(event) {
     closeModal();
   }
 }
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeModal();
+  }
+});

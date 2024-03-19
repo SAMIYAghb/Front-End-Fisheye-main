@@ -1,51 +1,34 @@
-// getPhotographers.js
-import Api from './api.js';
-import Photographer from './Photographer.js';
-import Media from './Media.js';
+
+import Api from "./api.js";
+import PhotographerFactory from "./Photographer.js";
 
 async function getPhotographers() {
-  const api = new Api('./data/photographers.json');
+  const api = new Api("./data/photographers.json");
   const data = await api.get();
+  const medias = [];
 
   const photographers = data.photographers.map((photographerData) => {
-    const photographer = new Photographer(photographerData);
+    const photographer =
+      PhotographerFactory.createPhotographer(photographerData);
+    const photographerMedias = data.media.filter(
+      (mediaData) => mediaData.photographerId === photographer.id
+      
+    );
     return {
       name: photographer.name,
       id: photographer.id,
       tagline: photographer.tagline,
       price: photographer.price,
       portrait: photographer.getPortraitPath(),
-      location: photographer.getLocation(),
-      medias: photographer.medias,
+      city: photographer.getLocation(),
+      country: photographer.getLocation(),
+      medias: photographerMedias,
     };
+
   });
-
-  const medias = data.media.map((mediaData) => {
-    const media = new Media(mediaData);
-    return {
-      id: media.getId(),
-      photographerId: media.getPhotographerId(),
-      title: media.getTitle(),
-      likes: media.getLikes(),
-      date: media.getDate(),
-      price: media.getPrice(),
-      type: media.getType(),
-      url: media.getUrl(),
-    };
-  });
-
-  medias.forEach((media) => {
-    const photographer = photographers.find((p) => p.id === media.photographerId);
-    const tmpName = photographer ? photographer.name : '';
-    const tmpUrl = media.url;
-
-    if (photographer && (media.type === 'image' || media.type === 'video')) {
-      media.url = `assets/images/${tmpName}/${tmpUrl}`;
-      photographer.medias.push(media);
-    }
-  });
-
   return photographers;
 }
 
+
 export default getPhotographers;
+

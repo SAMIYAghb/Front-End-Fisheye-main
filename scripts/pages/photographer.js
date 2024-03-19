@@ -1,9 +1,6 @@
 import getPhotographers from '../models/getPhotographers.js';
-import {
-  mediaFactory,
-} from '../factories/photographer.js';
 import openLightbox from '../models/lightbox.js';
-
+import MediaFactory from '../factories/MediaFactory.js';
 // créer le header du photographe
 function headerPhotographer(photographer) {
   const photographeName = document.querySelector('.photograph-name');
@@ -12,7 +9,7 @@ function headerPhotographer(photographer) {
   const photographeHeader = document.querySelector('.photograph-header');
 
   photographeName.innerText = photographer.name;
-  photographeLocation.innerText = photographer.location;
+  photographeLocation.innerText = photographer.city;
   photographeTagline.innerText = photographer.tagline;
 
   const img = document.createElement('img');
@@ -36,8 +33,11 @@ function displayMedia(medias) {
   // console.log(imagesContainer);
   imagesContainer.innerHTML = '';
   medias.forEach((media) => {
-    const mediaModel = mediaFactory(media);
-    const mediaCardDOM = mediaModel.getMediaCardDOM();
+    const mediaFactory = new MediaFactory();
+    const mediaObject = mediaFactory.createMedia(media);
+    console.log(mediaObject);
+    const mediaCardDOM = mediaObject.renderHtml();
+    console.log(mediaCardDOM);
     imagesContainer.appendChild(mediaCardDOM);
   });
 }
@@ -92,17 +92,15 @@ async function init() {
   }
 
   const photographers = await getPhotographers();
-  const photographerReq = photographers.find((photographer)=> photographer.id === photographerId);
-
-  if (!photographerReq) {
-    window.location.href = 'index.html';
-  }
-
+  // const photographerReq = photographers.find((photographer)=> photographer.id === photographerId);
+// console.log(photographerReq);
   // Récupération de l'objet photographe correspondant avec ses medias
   // const photographers = await getPhotographers();
 
   const photographer = photographers.find((item) => item.id === photographerId);
-
+  if (!photographer) {
+    window.location.href = 'index.html';
+  }
   // affichage le header du photographe
   headerPhotographer(photographer);
 

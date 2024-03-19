@@ -9,21 +9,23 @@ function openLightbox(medias, x, y, currentIndex) {
   }
 
   function showMedia() {
-    const { url } = medias[currentIndex];
-    const { title } = medias[currentIndex];
+    const {
+      photographerId, image, video, title,
+    } = medias[currentIndex];
+
     const lightboxImg = document.querySelector('.lightbox-img');
     const lightboxImgContainer = lightboxImg.parentElement;
 
     // soit  'img' ou 'video'
-    if (medias[currentIndex].type === 'image') {
+    if (image) {
       lightboxImgContainer.innerHTML = `
-          <img src="${url}" class="lightbox-img" alt="${title}" title="${title}">
-          <figcaption class="lightbox-caption">${title}</figcaption>
+          <img src='assets/images/${photographerId}/${image}'class='lightbox-img' alt='${title}' title='${title}' aria-label='${title}'>
+          <figcaption class='lightbox-caption'>${title}</figcaption>
         `;
-    } else {
+    } else if (video) {
       lightboxImgContainer.innerHTML = `
-          <video controls src="${url}" class="lightbox-img" type="video/mp4" alt="${title}" title="${title}" id="video"></video>
-          <figcaption class="lightbox-caption">${title}</figcaption>
+          <video controls src='assets/images/${photographerId}/${video}' class='lightbox-img' type='video/mp4' alt='${title}' title='${title}' id='video' aria-label='${title}'></video>
+          <figcaption class='lightbox-caption'>${title}</figcaption>
         `;
     }
     const newLightboxImg = document.querySelector('.lightbox-img');
@@ -107,10 +109,10 @@ function openLightbox(medias, x, y, currentIndex) {
         // Si le focus est sur le bouton de fermeture, fermer la modal
         closeButton.click();
       } else if (document.activeElement === prevButton) {
-        // Si le focus est sur le bouton "prev", passer à la photo précédente
+        // Si le focus est sur le bouton 'prev', passer à la photo précédente
         prevButton.click();
       } else if (document.activeElement === nextButton) {
-        // Si le focus est sur le bouton "next", passer à la photo suivante
+        // Si le focus est sur le bouton 'next', passer à la photo suivante
         nextButton.click();
       }
     }
