@@ -1,6 +1,7 @@
 import getPhotographers from '../models/getPhotographers.js';
 import openLightbox from '../models/lightbox.js';
 import MediaFactory from '../factories/MediaFactory.js';
+
 // créer le header du photographe
 function headerPhotographer(photographer) {
   const photographeName = document.querySelector('.photograph-name');
@@ -35,9 +36,7 @@ function displayMedia(medias) {
   medias.forEach((media) => {
     const mediaFactory = new MediaFactory();
     const mediaObject = mediaFactory.createMedia(media);
-    console.log(mediaObject);
     const mediaCardDOM = mediaObject.renderHtml();
-    console.log(mediaCardDOM);
     imagesContainer.appendChild(mediaCardDOM);
   });
 }
@@ -85,17 +84,12 @@ async function init() {
   // Récupération de l'ID du photographe
   const params = new URL(document.location).searchParams;
   const photographerId = parseInt(params.get('id'), 10);
-  console.log(photographerId);
 
   if (Number.isNaN(photographerId)) {
     window.location.href = 'index.html';
   }
 
   const photographers = await getPhotographers();
-  // const photographerReq = photographers.find((photographer)=> photographer.id === photographerId);
-// console.log(photographerReq);
-  // Récupération de l'objet photographe correspondant avec ses medias
-  // const photographers = await getPhotographers();
 
   const photographer = photographers.find((item) => item.id === photographerId);
   if (!photographer) {
@@ -105,7 +99,6 @@ async function init() {
   headerPhotographer(photographer);
 
   // affichage la galerie du photographe
-  // const sortedMedias = sortMediaBy('likes', photographer.medias);
   displayMedia(photographer.medias);
   // displayMedia(sortedMedias);
 
@@ -158,17 +151,12 @@ async function init() {
     // click sur les choix du filtre
     if (event.target.tagName === 'LI') {
       selectedFilter(event.target, photographer.medias);
-      // if (event.key === 'Enter') {
-      //   event.preventDefault();
-      //   selectedFilter(event.target, photographer.medias);
-      // }
     }
   });
 
   // lancer la lightbox en cliquant sur Entrée
   const imagesContainer = document.getElementById('photographer-images');
   imagesContainer.addEventListener('keydown', (event) => {
-    // console.log('yyyyy');
     const isMediaElement = event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO';
     if (isMediaElement && (event.key === 'Enter' || event.key === ' ')) {
       event.preventDefault();
@@ -225,7 +213,7 @@ async function init() {
   function handleLikeEnter(event) {
     if (event.key === 'Enter') {
       const liked = event.target.parentElement;
-      // console.log(liked);
+
       if (
         event.target.classList.contains('fa-regular') && liked
         && !liked.classList.contains('liked')

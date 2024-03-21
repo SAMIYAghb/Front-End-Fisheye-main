@@ -1,5 +1,5 @@
 import getPhotographers from '../models/getPhotographers.js';
-import PhotographerFactory from '../models/Photographer.js';
+import PhotographerFactory from '../models/PhotographerFactory.js';
 
 // Affiche les données des photographes
 function displayData(photographers) {

@@ -10,7 +10,7 @@ function openLightbox(medias, x, y, currentIndex) {
 
   function showMedia() {
     const {
-      photographerId, image, video, title,
+      photographerId, image, video, title
     } = medias[currentIndex];
 
     const lightboxImg = document.querySelector('.lightbox-img');

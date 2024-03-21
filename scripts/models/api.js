@@ -1,5 +1,3 @@
-
-// api.js
 class Api {
   constructor(url) {
     this.url = url;

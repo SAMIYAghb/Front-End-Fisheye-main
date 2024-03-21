@@ -14,9 +14,8 @@ function closeModal() {
   modal.setAttribute('aria-hidden', 'true');
   const main = document.getElementById('main');
   main.setAttribute('aria-hidden', 'false');
-  // Mettre le focus sur l'élément image après la fermeture de la modale
-  // closeButton.focus();
   // Nettoyer les messages d'erreur
+  // sélectionne tous les éléments dont l'attribut id commence par "error-messages-".
   const errorContainers = document.querySelectorAll('[id^="error-messages-"]');
   errorContainers.forEach((container) => {
     container.innerHTML = '';
@@ -96,14 +95,14 @@ function validateForm() {
   document.getElementById('error-messages').innerText = '';
 
   // Valider le prénom
-  if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(prenom)) {
+  if (!/^[a-zA-ZÀ-ÿ-]+$/.test(prenom)) {
     document.getElementById('error-messages-prenom').innerText = 'Le prénom ne peut contenir que des lettres.';
   } else if (prenom.length < 2 || prenom.length > 50) {
     document.getElementById('error-messages-prenom').innerText = 'Le prénom doit avoir entre 2 et 50 caractères.';
   }
 
   // Valider le nom
-  if (!/^[a-zA-ZÀ-ÿ\s]+$/.test(nom)) {
+  if (!/^[a-zA-ZÀ-ÿ-]+$/.test(nom)) {
     document.getElementById('error-messages-nom').innerText = 'Le nom ne peut contenir que des lettres.';
   } else if (nom.length < 1 || nom.length > 50) {
     document.getElementById('error-messages-nom').innerText = 'Le nom doit avoir entre 1 et 50 caractères.';
@@ -147,4 +146,3 @@ function sendForm(event) {
     closeModal();
   }
 }
-

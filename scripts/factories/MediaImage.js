@@ -7,36 +7,8 @@
 //         return `<img src='${this.param1}'> `;
 //     }
 // }
-// class MediaImage{
-//     constructor(id, photographerId, title , image, tags , like, date, price, alt){
-// this.param1 = param1;
 
-//     }
-//     renderHtml(){
-//         return `<img src='${uri}' alt='${this.title}' title='${this.title}' id='${this.id}' tabindex='0' aria-label='${this.title}'>
-//         <figcaption>${this.title}</figcaption>'> `;
-//     }
-// }
-
-// class MediaImage {
-//     constructor(src) {
-//         this.src = src;
-//     }
-//     renderHtml() {
-//         return `<img src='${this.src}'>`;
-//     }
-// }
-
-class Media {
-  constructor(data) {
-    this.id = data.id;
-    this.photographerId = data.photographerId;
-    this.title = data.title;
-    this.likes = data.likes;
-    this.date = data.date;
-    this.price = data.price;
-  }
-}
+import Media from './Media.js';
 
 class MediaImage extends Media {
   constructor(data) {

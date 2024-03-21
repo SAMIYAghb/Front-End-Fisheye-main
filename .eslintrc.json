@@ -12,14 +12,9 @@
         "import/extensions": ["error", "always", {
             "js": "never'"
           }],
-    //    "operator-linebreak": ["error", "before"],
         "eqeqeq": ["error", "always"],
-        // "no-param-reassign": ["error", { "props": true }],
         "no-param-reassign": "off",
-        "no-lonely-if": "off"
-            // "max-classes-per-file": ["error", 3]
-        
-
-
+        "no-lonely-if": "off",
+        "comma-dangle": ["error", "never"]
     }
 }
