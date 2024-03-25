@@ -1,4 +1,4 @@
-import Api from './api.js';
+import Api from '../models/api.js';
 import PhotographerFactory from './PhotographerFactory.js';
 
 async function getPhotographers() {

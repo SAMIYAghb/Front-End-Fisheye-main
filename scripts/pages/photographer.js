@@ -1,4 +1,4 @@
-import getPhotographers from '../models/getPhotographers.js';
+import getPhotographers from '../factories/getPhotographers.js';
 import openLightbox from '../models/lightbox.js';
 import MediaFactory from '../factories/MediaFactory.js';
 
