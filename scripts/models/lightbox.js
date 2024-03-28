@@ -1,6 +1,13 @@
 // Ouverture de la lightbox
+// initialisation des constantes des element html
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+const closeButton = document.querySelector('.close');
+const lightbox = document.querySelector('.lightbox');
+const main = document.getElementById('main');
+const borderLightbox = document.querySelector('.border-lightbox');
 function openLightbox(medias, x, y, currentIndex) {
-  const main = document.getElementById('main');
+  lightbox.setAttribute('aria-hidden', 'false');
   main.setAttribute('aria-hidden', 'true');
   document.body.classList.add('no-scroll'); // Ajouter une classe pour désactiver le défilement du corps
   // l'affiche de l'a bonne 'imagequi correspond  à l'index dans le tableau des medias
@@ -35,13 +42,6 @@ function openLightbox(medias, x, y, currentIndex) {
     }, 100);
     newLightboxImg.focus();
   }
-
-  // initialisation des constantes des element html
-  const prevButton = document.querySelector('.prev');
-  const nextButton = document.querySelector('.next');
-  const closeButton = document.querySelector('.close');
-  const lightbox = document.querySelector('.lightbox');
-  const borderLightbox = document.querySelector('.border-lightbox');
 
   showMedia();
   // animation apre ouvrture de la lightbox utilisant le click de la souris
@@ -89,6 +89,9 @@ function openLightbox(medias, x, y, currentIndex) {
       borderLightbox.style.transition = 'background-color 0.2s ease-out';
       lightbox.setAttribute('aria-hidden', 'true'); // La lightbox est cachée
       main.setAttribute('aria-hidden', 'false');
+      main.focus();
+      const imgp = document.querySelector('.img-rounded');
+      imgp.focus();
     }
   });
 

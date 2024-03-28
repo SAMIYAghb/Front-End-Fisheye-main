@@ -95,17 +95,21 @@ function validateForm() {
   document.getElementById('error-messages').innerText = '';
 
   // Valider le prénom
-  if (!/^[a-zA-ZÀ-ÿ-]+$/.test(prenom)) {
+  if (prenom.length === 0) {
+    document.getElementById('error-messages-prenom').innerText = 'Le prénom est requis.';
+  } else if (!/^[a-zA-ZÀ-ÿ-]+$/.test(prenom)) {
     document.getElementById('error-messages-prenom').innerText = 'Le prénom ne peut contenir que des lettres.';
   } else if (prenom.length < 2 || prenom.length > 50) {
     document.getElementById('error-messages-prenom').innerText = 'Le prénom doit avoir entre 2 et 50 caractères.';
   }
 
   // Valider le nom
-  if (!/^[a-zA-ZÀ-ÿ-]+$/.test(nom)) {
+  if (nom.length === 0) {
+    document.getElementById('error-messages-nom').innerText = 'Le nom est requis.';
+  } else if (!/^[a-zA-ZÀ-ÿ-]+$/.test(nom)) {
     document.getElementById('error-messages-nom').innerText = 'Le nom ne peut contenir que des lettres.';
-  } else if (nom.length < 1 || nom.length > 50) {
-    document.getElementById('error-messages-nom').innerText = 'Le nom doit avoir entre 1 et 50 caractères.';
+  } else if (nom.length < 2 || nom.length > 50) {
+    document.getElementById('error-messages-nom').innerText = 'Le nom doit avoir entre 2 et 50 caractères.';
   }
 
   // Valider l'email
