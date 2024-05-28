@@ -1,7 +1,7 @@
 # projet P6 FishEye - Parcours Front-end
 
 # Author :sunglasses:
-[Samiya Bouridane](https://www.linkedin.com/in/samiyab/)
+[Samiya Brd](https://www.linkedin.com/in/samiyab/)
 
 # maquette:
 [figma](https://www.figma.com/file/pt8xJxC1QffW4HX16QhGZJ/UI-Design-FishEye-FR-OLD)
